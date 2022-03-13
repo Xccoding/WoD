@@ -1,4 +1,7 @@
 // Dota Heroes File
+
+#base heroes/mage/ability.txt
+
 "DOTAAbilities"
 {
 	"Version"		"1"
