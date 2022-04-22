@@ -1,6 +1,7 @@
 // Dota Heroes File
 
 #base heroes/mage/ability.txt
+#base heroes/death_knight/ability.txt
 
 "DOTAAbilities"
 {

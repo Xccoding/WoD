@@ -1,0 +1,44 @@
+"DOTAHeroes"
+{
+    "npc_dota_hero_blood_death_knight"
+	{
+        "override_hero" "npc_dota_hero_abaddon"
+		"Ability1"	"death_knight_midnight_pulse"
+		"Ability2"	"death_knight_hellfire_blast"
+		"Ability3"	"death_knight_chaos_strike"
+		"Ability4"	"death_knight_gravekeepers_cloak"
+		"Ability5"	"death_knight_reality_rift"
+		"Ability6"	"death_knight_borrowed_time"
+
+		"Ability10"	""
+		"Ability11"	""
+		"Ability12"	""
+		"Ability13"	""
+		"Ability14"	""
+		"Ability15"	""
+		"Ability16"	""
+		"Ability17"	""
+		"Ability18"	""
+	}
+
+	"npc_dota_hero_frost_death_knight"
+	{
+        "override_hero" "npc_dota_hero_skeleton_king"
+		"Ability1"	"death_knight_mortal_strike"
+		"Ability2"	"death_knight_frost_nova"
+		"Ability3"	"death_knight_chaos_strike"
+		"Ability4"	"death_knight_gravekeepers_cloak"
+		"Ability5"	"death_knight_reality_rift"
+		"Ability6"	"death_knight_borrowed_time"
+
+		"Ability10"	""
+		"Ability11"	""
+		"Ability12"	""
+		"Ability13"	""
+		"Ability14"	""
+		"Ability15"	""
+		"Ability16"	""
+		"Ability17"	""
+		"Ability18"	""
+	}
+}

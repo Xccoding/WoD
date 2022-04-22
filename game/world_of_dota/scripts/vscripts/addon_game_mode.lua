@@ -1,8 +1,10 @@
 -- Generated from template
 
-if CAddonTemplateGameMode == nil then
-	CAddonTemplateGameMode = class({})
-end
+
+_G.CAddonTemplateGameMode = CAddonTemplateGameMode or class({})
+-- if CAddonTemplateGameMode == nil then
+-- 	CAddonTemplateGameMode = class({})
+-- end
 
 function Precache( context )
 	--[[
@@ -21,6 +23,12 @@ function Activate()
 end
 
 function CAddonTemplateGameMode:InitGameMode()
+	require('combat.common.managers.combat_manager')
+	require('events.OnNpcSpawned')
+
+	--设定监听事件
+	ListenToGameEvent('npc_spawned',Dynamic_Wrap(CAddonTemplateGameMode,'OnNpcSpawned'),self)
+
 	print( "Template addon is loaded." )
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 2 )
 end
