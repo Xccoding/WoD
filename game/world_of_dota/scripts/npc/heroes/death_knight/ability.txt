@@ -235,12 +235,14 @@
 		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_YES"
         "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 
-		"AbilityCooldown"				"5"
+		"AbilityCooldown"				"1.5"
 		"AbilityManaCost"				"0"
 		"AbilityCastRange"				"500"
 		"AbilityCastRangeBuffer"		"250"
 		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
 		"AbilityCastPoint"				"0.0"
+		"AbilityCharges"				"3"
+		"AbilityChargeRestoreTime"		"10"
 		
 
 		"precache"
@@ -258,6 +260,7 @@
 			"nova_free_chance"	"45"
 			"nova_bonus_damage_pct"	"300"
 			"nova_free_duration"	"15"
+			"bulldoze_stack"	"2"
         }
 	}
 
@@ -312,12 +315,51 @@
 		"ScriptFile"	"heroes/abilities/death_knight/frost/death_knight_frost_shield"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
         "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 
 		"AbilityCooldown"				"20"
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"500"
+		//"AbilityCastRangeBuffer"		"250"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
+		"AbilityCastPoint"				"0.3"
+		
+
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_lich.vsndevts"
+		}
+
+		"AbilityValues"
+        {
+			"duration"	"10"
+			"damage"	"1"
+			"ap_factor"	"10"
+			"radius"	"500"
+			"debuff_duration"	"0.5"
+			"slow_down_pct"	"30"
+			"dot_interval"	"0.25"
+			"bonus_armor_pct"	"3"
+        }
+	}
+
+	//冰DK威吓
+	"death_knight_bulldoze"
+	{
+		"BaseClass"	"ability_lua"
+		"AbilityTextureName"	"spirit_breaker_bulldoze"
+		"ScriptFile"	"heroes/abilities/death_knight/frost/death_knight_bulldoze"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		//"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
+		//"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
+        "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+
+		"AbilityCooldown"				"90"
 		"AbilityManaCost"				"0"
 		//"AbilityCastRange"				"500"
 		//"AbilityCastRangeBuffer"		"250"
@@ -327,15 +369,16 @@
 
 		"precache"
 		{
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_abaddon.vsndevts"
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_spirit_breaker.vsndevts"
 		}
 
 		"AbilityValues"
         {
-			"duration"	"10"
-			"bonus_status_resistance"	"100"
-			"hp_factor"	"30"
-			"radius"	"500"
+			"duration"	"30"
+			"bonus_str_pct"	"10"
+			"bonus_str_stack_pct"	"1"
+			"stack_mortal_strike"	"2"
+			"stack_others"	"1"
         }
 	}
 

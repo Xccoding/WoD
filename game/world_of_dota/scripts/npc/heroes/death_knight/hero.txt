@@ -26,8 +26,8 @@
         "override_hero" "npc_dota_hero_skeleton_king"
 		"Ability1"	"death_knight_mortal_strike"
 		"Ability2"	"death_knight_frost_nova"
-		"Ability3"	"death_knight_chaos_strike"
-		"Ability4"	"death_knight_gravekeepers_cloak"
+		"Ability3"	"death_knight_frost_shield"
+		"Ability4"	"death_knight_bulldoze"
 		"Ability5"	"death_knight_reality_rift"
 		"Ability6"	"death_knight_borrowed_time"
 

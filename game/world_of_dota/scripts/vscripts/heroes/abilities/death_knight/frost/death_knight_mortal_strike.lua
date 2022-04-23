@@ -41,6 +41,7 @@ function modifier_death_knight_mortal_strike:OnCreated(params)
     self.crit_duration = self:GetAbility():GetSpecialValueFor("crit_duration")
     self.nova_free_chance = self:GetAbility():GetSpecialValueFor("nova_free_chance")
     self.nova_free_duration = self:GetAbility():GetSpecialValueFor("nova_free_duration")
+    self.bulldoze_stack = self:GetAbility():GetSpecialValueFor("bulldoze_stack")
 end
 function modifier_death_knight_mortal_strike:OnRefresh(params)
     self.damage = self:GetAbility():GetSpecialValueFor("damage")
@@ -49,6 +50,7 @@ function modifier_death_knight_mortal_strike:OnRefresh(params)
     self.crit_duration = self:GetAbility():GetSpecialValueFor("crit_duration")
     self.nova_free_chance = self:GetAbility():GetSpecialValueFor("nova_free_chance")
     self.nova_free_duration = self:GetAbility():GetSpecialValueFor("nova_free_duration")
+    self.bulldoze_stack = self:GetAbility():GetSpecialValueFor("bulldoze_stack")
 end
 function modifier_death_knight_mortal_strike:DeclareFunctions()
 	return {
@@ -112,18 +114,28 @@ function modifier_death_knight_mortal_strike:OnAttackStart(params)
     end
 end
 function modifier_death_knight_mortal_strike:OnAttack(params)
+    if not IsServer() then 
+        return 
+    end
     if params.attacker == self:GetParent() then
         if self:CheckUseOrb(params.record) then
             local hCaster = self:GetCaster()
-            self:GetAbility():UseResources(true, true, true)
+            local hAbility = self:GetAbility()
+            if hAbility:GetCurrentAbilityCharges() > 0 then
+                hAbility:UseResources(true, true, true)
+                hAbility:SetCurrentAbilityCharges(hAbility:GetCurrentAbilityCharges() - 1)
 
-            local particleID = ParticleManager:CreateParticle("particles/units/heroes/death_knight/death_knight_mortal_strike.vpcf", PATTACH_ABSORIGIN_FOLLOW, hCaster)
-            --ParticleManager:SetParticleControlEnt(particleID, 0, hCaster, PATTACH_POINT_FOLLOW, "attach_attack1", hCaster:GetAbsOrigin(), false)
-            ParticleManager:ReleaseParticleIndex(particleID)
+                local particleID = ParticleManager:CreateParticle("particles/units/heroes/death_knight/death_knight_mortal_strike.vpcf", PATTACH_ABSORIGIN_FOLLOW, hCaster)
+                --ParticleManager:SetParticleControlEnt(particleID, 0, hCaster, PATTACH_POINT_FOLLOW, "attach_attack1", hCaster:GetAbsOrigin(), false)
+                ParticleManager:ReleaseParticleIndex(particleID)
+            end    
         end
     end
 end
 function modifier_death_knight_mortal_strike:OnAttackRecord(params)
+    if not IsServer() then 
+        return 
+    end
     if params.attacker == self:GetParent() then
         local hCaster = self:GetCaster()
         local hAbility = self:GetAbility()
@@ -133,14 +145,16 @@ function modifier_death_knight_mortal_strike:OnAttackRecord(params)
             return
         end
 
-        if (not hCaster:IsSilenced()) and hAbility:IsCooldownReady() and hAbility:IsOwnersManaEnough() and (hCaster:GetCurrentActiveAbility() == hAbility or hAbility:GetAutoCastState()) then
-            --self.records[params.record] = true
+        if (not hCaster:IsSilenced()) and hAbility:IsCooldownReady() and hAbility:GetCurrentAbilityCharges() > 0 and hAbility:IsOwnersManaEnough() and (hCaster:GetCurrentActiveAbility() == hAbility or hAbility:GetAutoCastState()) then            --self.records[params.record] = true
             table.insert( self.records, {iRecord = params.record, bOrb = true})
         end
         --print("attack_record",params.record)
     end
 end
 function modifier_death_knight_mortal_strike:OnAttackLanded(params)
+    if not IsServer() then 
+        return 
+    end
     if params.attacker == self:GetParent() then
         if self:CheckUseOrb(params.record) then
             local hCaster = self:GetCaster()
@@ -165,8 +179,15 @@ function modifier_death_knight_mortal_strike:OnAttackLanded(params)
 
             EmitSoundOn(sound_name, hCaster)
 
+            --触发免费nova
             if RandomFloat(0, 100) < self.nova_free_chance then
                 hCaster:AddNewModifier(hCaster, hAbility, "modifier_death_knight_mortal_strike_free_nova", {duration = self.nova_free_duration})
+            end
+
+            --威吓叠层
+            local bulldoze_buff = hCaster:FindModifierByName("modifier_death_knight_bulldoze")
+            if bulldoze_buff ~= nil then
+                bulldoze_buff:SetStackCount(bulldoze_buff:GetStackCount() + self.bulldoze_stack)
             end
 
         end
@@ -175,7 +196,7 @@ end
 function modifier_death_knight_mortal_strike:OnAttackRecordDestroy(params)
     if params.attacker == self:GetParent() then
         if params.record then
-            --self:RemoveRecord(params.record)
+            self:RemoveRecord(params.record)
         end
     end
 end

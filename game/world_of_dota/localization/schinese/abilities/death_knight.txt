@@ -36,6 +36,18 @@
 "DOTA_Tooltip_modifier_death_knight_mortal_strike_free_nova_Description"	"下一次寒霜爆发造成的伤害提高，且不消耗魔法值"
 
 "DOTA_Tooltip_ability_death_knight_frost_nova"	"寒霜爆发"
-"DOTA_Tooltip_ability_death_knight_frost_nova_Description"	"对目标及其附近%radius%范围内的敌人造成%damage_hit%点魔法伤害，并使其感染寒霜诅咒，持续%duration%秒；主目标会额外受到%main_target_damage_pct%%%的伤害。\n寒霜诅咒：<br>周期性地受到伤害并为死亡骑士恢复魔法值。\n本命一击有%nova_free_chance%%%使你的下一次寒霜爆发不消耗魔法值，且造成的伤害提高%nova_bonus_damage_pct%%%。"
+"DOTA_Tooltip_ability_death_knight_frost_nova_Description"	"对目标及其附近%radius%范围内的敌人造成%damage_hit%点魔法伤害，并使其感染寒霜诅咒，持续%duration%秒；主目标会额外受到%main_target_damage_pct%%%的伤害。\n寒霜诅咒：<br>周期性地受到伤害并为死亡骑士恢复%mana_get_pct%%%最大魔法值。\n本命一击有%nova_free_chance%%%使你的下一次寒霜爆发不消耗魔法值，且造成的伤害提高%nova_bonus_damage_pct%%%。"
 "DOTA_Tooltip_modifier_death_knight_frost_nova"	"寒霜诅咒"
 "DOTA_Tooltip_modifier_death_knight_frost_nova_Description"	"周期性地受到伤害，并为死亡骑士恢复魔法值"
+
+"DOTA_Tooltip_ability_death_knight_frost_shield"	"冰霜魔盾"
+"DOTA_Tooltip_ability_death_knight_frost_shield_Description"	"施加一个冰霜魔盾环绕自身，使自身的护甲提高%bonus_armor_pct%%%，持续%duration%秒，期间每秒对附近%radius%范围内的敌人造成%damage%点魔法伤害，并使其移动速度降低%slow_down_pct%%%."
+"DOTA_Tooltip_modifier_death_knight_frost_shield"	"冰霜魔盾"
+"DOTA_Tooltip_modifier_death_knight_frost_shield_Description"	"周期性地对附近的敌人造成伤害并使其减速"
+"DOTA_Tooltip_modifier_death_knight_frost_shield_slow_down"	"冰霜魔盾"
+"DOTA_Tooltip_modifier_death_knight_frost_shield_slow_down_Description"	"移动速度降低"
+
+"DOTA_Tooltip_ability_death_knight_bulldoze"	"威吓"
+"DOTA_Tooltip_ability_death_knight_bulldoze_Description"	"冰霜能量使你的力量提高%bonus_str_pct%%%，且免疫任何强制位移效果（不论敌我），持续%duration%秒。<br>威吓期间每次本命一击使你的力量额外提高%stack_mortal_strike%%%，每次寒霜爆发和冰霜魔盾使你的力量额外提高%stack_others%%%。"
+"DOTA_Tooltip_modifier_death_knight_bulldoze"	"威吓"
+"DOTA_Tooltip_modifier_death_knight_bulldoze_Description"	"力量提高%dMODIFIER_PROPERTY_TOOLTIP%%%"

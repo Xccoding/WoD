@@ -39,6 +39,7 @@ function modifier_common:OnTakeDamage(params)
     for index = 1, #self.damage_records do
         local msg_type = 0
         local paticle_name
+        local particleID
         
         if self.damage_records[index].crit == true then
             --暴击特效
@@ -49,7 +50,12 @@ function modifier_common:OnTakeDamage(params)
             --普通伤害特效
             msg_type = 9 
         end
-        local particleID = ParticleManager:CreateParticleForPlayer(paticle_name, PATTACH_OVERHEAD_FOLLOW, hVictim, hAttacker:GetPlayerOwner())
+        if hAttacker:IsOwnedByAnyPlayer() then
+            particleID = ParticleManager:CreateParticleForPlayer(paticle_name, PATTACH_OVERHEAD_FOLLOW, hVictim, hAttacker:GetPlayerOwner())
+        else
+            particleID = ParticleManager:CreateParticle(paticle_name, PATTACH_OVERHEAD_FOLLOW, hVictim)
+        end
+        
         ParticleManager:SetParticleControl(particleID, 1, Vector(0, params.damage, msg_type))
         ParticleManager:SetParticleControl(particleID, 2, Vector(1, number_length + 1, 0))
         if params.damage_type == DAMAGE_TYPE_PHYSICAL then
