@@ -13,8 +13,8 @@
 		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
 
 		"AbilityCooldown"				"20"
-		"AbilityManaCost"				"65"
-		"AbilityCastRange"				"600"
+		"AbilityManaCost"				"10"
+		"AbilityCastRange"				"900"
 		"AbilityCastRangeBuffer"		"250"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
 		"AbilityCastPoint"				"0.3"
@@ -28,8 +28,7 @@
 		"AbilityValues"
         {
             "duration"  "10"
-            "damage"    "5"
-			"ap_factor"	"1"
+			"ap_factor"	"4"
 			"damage_tick"	"1"
 			"radius"	"500"
 			"pulse_bonus_target_count"	"3"
@@ -50,12 +49,14 @@
 		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
         "SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 
-		"AbilityCooldown"				"10"
-		"AbilityManaCost"				"65"
+		"AbilityCooldown"				"1.5"
+		"AbilityManaCost"				"10"
 		"AbilityCastRange"				"500"
 		"AbilityCastRangeBuffer"		"250"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityCastPoint"				"0.3"
+		"AbilityCharges"				"3"
+		"AbilityChargeRestoreTime"		"10"
 		
 
 		"precache"
@@ -65,12 +66,10 @@
 
 		"AbilityValues"
         {
-            "debuff_duration"  "20"
-            "damage_hit"    "5"
-			"ap_factor_hit"	"1"
-			"dot_interval"	"1"
-			"damage_dot"	"1"
-			"ap_factor_dot"	"1"
+            "debuff_duration"  "24"
+			"ap_factor_hit"	"43"
+			"dot_interval"	"3"
+			"ap_factor_dot"	"8"
 			"speed"			"1000"
 			"search_radius"			"600"
 			"bonus_target_count"	"1"
@@ -92,10 +91,10 @@
 		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_YES"
         "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 
-		"AbilityCooldown"				"10"
-		"AbilityManaCost"				"65"
-		"AbilityCastRange"				"500"
-		"AbilityCastRangeBuffer"		"250"
+		"AbilityCooldown"				"8"
+		"AbilityManaCost"				"35"
+		//"AbilityCastRange"				"500"
+		//"AbilityCastRangeBuffer"		"250"
 		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
 		"AbilityCastPoint"				"0.0"
 		
@@ -108,12 +107,12 @@
 
 		"AbilityValues"
         {
-			"damage"	"1"
-			"ap_factor"	"1"
+			"ap_factor"	"46"
 			"damage_record_time"	"5"
 			"min_heal_percent"	"5"
-			"heal_percent"	"45"
-			"shield_percent"	"45"
+			"heal_percent"	"40"
+			"str_factor"	"16"
+			"str_factor_tooltip"	"0.16"
 			"shield_duration"	"15"
         }
 	}
@@ -132,7 +131,7 @@
         "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 
 		"AbilityCooldown"				"25"
-		"AbilityManaCost"				"15"
+		"AbilityManaCost"				"10"
 		//"AbilityCastRange"				"500"
 		//"AbilityCastRangeBuffer"		"250"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
@@ -141,17 +140,18 @@
 
 		"precache"
 		{
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_chaos_knight.vsndevts"
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_abaddon.vsndevts"
 		}
 
 		"AbilityValues"
         {
-			"max_stack"	"12"
-			"stack_per_tick"	"3"
-			"bonus_armor_factor"	"5"
+			"max_stack"	"16"
+			"first_stack"	"12"
+			"stack_per_tick"	"4"
+			"bonus_armor_str_factor"	"70"
+			"bonus_attack_speed"	"10"
 			"incoming_damage_pct"	"25"
-			"duration"	"6"
+			"duration"	"4"
 			"cloak_cooldown"	"10"
         }
 	}
@@ -201,14 +201,12 @@
 		//"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_YES"
         "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 
-		"AbilityCooldown"				"25"
+		"AbilityCooldown"				"50"
 		"AbilityManaCost"				"0"
 		//"AbilityCastRange"				"500"
 		//"AbilityCastRangeBuffer"		"250"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
 		"AbilityCastPoint"				"0.2"
-		
-
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_abaddon.vsndevts"
@@ -216,7 +214,7 @@
 
 		"AbilityValues"
         {
-			"duration"	"10"
+			"duration"	"7"
 			"bonus_status_resistance"	"100"
 			"hp_factor"	"30"
         }
@@ -253,14 +251,14 @@
 
 		"AbilityValues"
         {
-			"damage"	"1"
-			"ap_factor"	"1"
+			"ap_factor"	"66"
 			"crit_chance"	"150"
 			"crit_duration"	"15"
 			"nova_free_chance"	"45"
 			"nova_bonus_damage_pct"	"300"
 			"nova_free_duration"	"15"
 			"bulldoze_stack"	"2"
+			"mana_get_pct"	"20"
         }
 	}
 
@@ -278,7 +276,7 @@
         "SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 
 		"AbilityCooldown"				"10"
-		"AbilityManaCost"				"5"
+		"AbilityManaCost"				"0"
 		"AbilityCastRange"				"650"
 		"AbilityCastRangeBuffer"		"250"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
@@ -292,18 +290,17 @@
 
 		"AbilityValues"
         {
-			"damage_hit"	"5"
-			"ap_factor_hit"	"4"
+			"ap_factor_hit"	"14"
 			"duration"	"24"
-			"dot_interval"	"1"
-			"damage_dot"	"1"
-			"ap_factor_dot"	"1"
-			"main_target_damage_pct"	"10"
+			"dot_interval"	"3"
+			"ap_factor_dot"	"21"
+			"main_target_damage_pct"	"25"
 			"nova_free_chance"	"45"
 			"nova_bonus_damage_pct"	"300"
 			"nova_free_duration"	"15"
 			"radius"	"500"
-			"mana_get_pct"	"1"
+			"mana_get_pct"	"10"
+			"mana_get_pct_tick"	"1"
         }
 	}
 
@@ -336,13 +333,13 @@
 		"AbilityValues"
         {
 			"duration"	"10"
-			"damage"	"1"
-			"ap_factor"	"10"
+			"ap_factor"	"5.7"
 			"radius"	"500"
-			"debuff_duration"	"0.5"
-			"slow_down_pct"	"30"
-			"dot_interval"	"0.25"
+			"debuff_duration"	"1"
+			"slow_down_pct"	"20"
+			"dot_interval"	"1"
 			"bonus_armor_pct"	"3"
+			"mana_get_pct"	"10"
         }
 	}
 
@@ -359,7 +356,7 @@
 		//"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
         "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 
-		"AbilityCooldown"				"90"
+		"AbilityCooldown"				"60"
 		"AbilityManaCost"				"0"
 		//"AbilityCastRange"				"500"
 		//"AbilityCastRangeBuffer"		"250"
@@ -374,11 +371,85 @@
 
 		"AbilityValues"
         {
-			"duration"	"30"
+			"duration"	"12"
 			"bonus_str_pct"	"10"
 			"bonus_str_stack_pct"	"1"
 			"stack_mortal_strike"	"2"
 			"stack_others"	"1"
+			"str_factor"	"16"
+        }
+	}
+
+	//冰DK超声冲击波
+    "death_knight_sonic_wave"
+	{
+		"BaseClass"	"ability_lua"
+		"AbilityTextureName"	"queen_of_pain/arcana/queenofpain_sonic_wave_alt2"
+		"ScriptFile"	"heroes/abilities/death_knight/frost/death_knight_sonic_wave"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
+
+		"AbilityCooldown"				"120"
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"600"
+		"AbilityCastRangeBuffer"		"250"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"				"0.3"
+		
+
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_queenofpain.vsndevts"
+		}
+
+		"AbilityValues"
+        {
+			"ap_factor"	"320"
+			"distance"	"1000"
+			"width_start"	"350"
+			"width_end"	"700"
+			"slow_down_pct"		"50"
+			"duration"  "5"
+			"speed"	"1700"
+        }
+	}
+
+	//冰DK冰冻吐息
+	"death_knight_flamethrower"
+	{
+		"BaseClass"	"ability_lua"
+		"AbilityTextureName"	"death_knight_flamethrower"
+		"ScriptFile"	"heroes/abilities/death_knight/frost/death_knight_flamethrower"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
+        "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+
+		"AbilityCooldown"				"40"
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"400"
+		//"AbilityCastRangeBuffer"		"250"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
+		"AbilityCastPoint"				"0.3"
+		
+
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_winter_wyvern.vsndevts"
+		}
+
+		"AbilityValues"
+        {
+			"ap_factor"	"49"
+			"distance"	"400"
+			"angle"	"60"
+			"dot_interval"	"1"
+			"mana_cost_pct"	"16"
         }
 	}
 

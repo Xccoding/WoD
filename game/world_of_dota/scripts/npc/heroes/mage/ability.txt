@@ -1,37 +1,224 @@
 "DOTAAbilities"
 {
+	//火法火焰爆轰
     "mage_fireblast"
 	{
 		"BaseClass"	"ability_lua"
 		"AbilityTextureName"	"ogre_magi_fireblast"
 		"ScriptFile"	"heroes/abilities/mage/fire/mage_fireblast"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
-        "SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 
 		"AbilityCooldown"				"10"
 		"AbilityManaCost"				"65"
-		"AbilityCastRange"				"600"
+		"AbilityCastRange"				"900"
 		"AbilityCastRangeBuffer"		"250"
-		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityCastPoint"				"0.3"
+		//"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+		//"AbilityCastPoint"				"0.3"
 		
 
 		"precache"
 		{
-			"particle"	"particles/generic_gameplay/generic_manaburn.vpcf"
-			"particle"	"particles/units/heroes/hero_void_spirit/pulse/void_spirit_pulse_ring.vpcf"
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_ogre_magi.vsndevts"
 		}
 
 		"AbilityValues"
         {
-            "duration"  "1.5"
-            "damage"    "5"
-			"sp_factor"	"1"
+			"sp_factor"	"72"
         }
 	}
+
+	//火法灼热之箭
+	"mage_searing_arrows"
+	{
+		"BaseClass"	"ability_lua"
+		"AbilityTextureName"	"clinkz_searing_arrows"
+		"ScriptFile"	"heroes/abilities/mage/fire/mage_searing_arrows"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_TOGGLE"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
+        "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+
+		"AbilityCooldown"				"0"
+		"AbilityManaCost"				"10"
+		"AbilityCastRange"				"850"
+		"AbilityCastRangeBuffer"		"250"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"				"0.3"
+		
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_clinkz.vsndevts"
+		}
+
+		"AbilityValues"
+        {
+            "sp_factor"  "93"
+			"attack_range_override"	"850"
+			"attack_time_override"	"2.25"
+			"damage_pct"	"100"
+			"bonus_crit_chance"	"10"
+        }
+	}
+
+	//火法烈焰风暴
+    "mage_light_strike_array"
+	{
+		"BaseClass"	"ability_lua"
+		"AbilityTextureName"	"lina_light_strike_array"
+		"ScriptFile"	"heroes/abilities/mage/fire/mage_light_strike_array"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_YES"
+		"AnimationPlaybackRate"	"0.4"
+
+		"AbilityCooldown"				"6"
+		"AbilityManaCost"				"10"
+		"AbilityCastRange"				"900"
+		"AbilityCastRangeBuffer"		"250"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
+		"AbilityCastPoint"				"2"
+		
+
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_lina.vsndevts"
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_invoker.vsndevts"
+		}
+
+		"AbilityValues"
+        {
+            "duration"  "8"
+			"sp_factor"	"54"
+			"radius"	"320"
+			"slow_down_pct"	"20"
+			"spell_time"	"2.0"
+        }
+	}
+
+	//火法神灭斩
+    "mage_laguna_blade"
+	{
+		"BaseClass"	"ability_lua"
+		"AbilityTextureName"	"lina_laguna_blade"
+		"ScriptFile"	"heroes/abilities/mage/fire/mage_laguna_blade"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
+        //"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AnimationPlaybackRate"	"0.3"
+
+		"AbilityCooldown"				"6"
+		"AbilityManaCost"				"10"
+		"AbilityCastRange"				"900"
+		"AbilityCastRangeBuffer"		"250"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
+		"AbilityCastPoint"				"2"
+		
+
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_lina.vsndevts"
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_stormspirit.vsndevts"
+		}
+
+		"AbilityValues"
+        {
+			"sp_factor"	"151"
+			"spell_time"	"2.0"
+        }
+	}
+
+	//火法炽魂
+	"mage_fiery_soul"
+	{
+		"BaseClass"	"ability_lua"
+		"AbilityTextureName"	"lina_fiery_soul"
+		"ScriptFile"	"heroes/abilities/mage/fire/mage_fiery_soul"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		//"AbilityUnitDamageType"	"DAMAGE_TYPE_PHYSICAL"
+		//"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_YES"
+        "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+
+		"AbilityCooldown"				"50"
+		"AbilityManaCost"				"0"
+		//"AbilityCastRange"				"500"
+		//"AbilityCastRangeBuffer"		"250"
+		//"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
+		//"AbilityCastPoint"				"0.2"
+		
+
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_nevermore.vsndevts"
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_jakiro.vsndevts"
+		}
+
+		"AbilityValues"
+        {
+			"duration"	"10"
+			"bonus_magical_crit_chance"	"100"
+			"liquid_fire_damage_pct"	"200"
+			"combo_duration"		"15"
+			"combo_multiple"	"200"
+        }
+	}
+
+	//火法冥火暴击
+	"mage_hellfire_blast"
+	{
+		"BaseClass"	"ability_lua"
+		"AbilityTextureName"	"skeleton_king/blistering_shade/skeleton_king_hellfire_blast"
+		"ScriptFile"	"heroes/abilities/mage/fire/mage_hellfire_blast"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
+        "SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+
+		"AbilityCooldown"				"1.5"
+		"AbilityManaCost"				"10"
+		"AbilityCastRange"				"900"
+		"AbilityCastRangeBuffer"		"250"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCharges"				"2"
+		"AbilityChargeRestoreTime"		"25"
+		
+
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_skeletonking.vsndevts"
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_jakiro.vsndevts"
+		}
+
+		"AbilityValues"
+        {
+			"sp_factor"	"90"
+			"dot_interval"	"1"
+			"ap_factor_dot"	"8"
+			"duration"			"9"
+			"radius"			"300"
+			"int_factor"	"6"
+			"int_factor_tooltip"	"0.06"
+			"speed"	"1000"
+			"combo_multiple"	"200"
+        }
+	}
+
+
+
+
 }

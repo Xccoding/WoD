@@ -23,8 +23,9 @@ function Activate()
 end
 
 function CAddonTemplateGameMode:InitGameMode()
-	require('combat.common.managers.combat_manager')
+	require('common.combat.managers.combat_manager')
 	require('events.OnNpcSpawned')
+	require('utils')
 
 	--设定监听事件
 	ListenToGameEvent('npc_spawned',Dynamic_Wrap(CAddonTemplateGameMode,'OnNpcSpawned'),self)

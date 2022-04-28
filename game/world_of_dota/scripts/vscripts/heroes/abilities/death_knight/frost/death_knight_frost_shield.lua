@@ -8,8 +8,11 @@ function death_knight_frost_shield:OnSpellStart()
 	local hCaster = self:GetCaster()
 	local hAbility = self
 	local duration = self:GetSpecialValueFor("duration")
+	local mana_get_pct = self:GetSpecialValueFor("mana_get_pct")
 
 	hCaster:AddNewModifier(hCaster, hAbility, "modifier_death_knight_frost_shield", {duration = duration})
+
+	hCaster:CGiveMana(hCaster:GetMaxMana() * mana_get_pct * 0.01, self, hCaster)
 
 	EmitSoundOn("Hero_Lich.IceAge", hCaster)
 end
@@ -19,7 +22,6 @@ if modifier_death_knight_frost_shield == nil then
 	modifier_death_knight_frost_shield = class({})
 end
 function modifier_death_knight_frost_shield:OnCreated(params)
-	self.damage = self:GetAbility():GetSpecialValueFor("damage")
     self.ap_factor = self:GetAbility():GetSpecialValueFor("ap_factor")
     self.dot_interval = self:GetAbility():GetSpecialValueFor("dot_interval")
 	self.radius = self:GetAbility():GetSpecialValueFor("radius")
@@ -33,15 +35,18 @@ function modifier_death_knight_frost_shield:OnCreated(params)
 
 	if IsServer() then
 		self:StartIntervalThink(self.dot_interval)
+		self:OnIntervalThink()
 	end
 end
 function modifier_death_knight_frost_shield:OnRefresh(params)
-	self.damage = self:GetAbility():GetSpecialValueFor("damage")
     self.ap_factor = self:GetAbility():GetSpecialValueFor("ap_factor")
     self.dot_interval = self:GetAbility():GetSpecialValueFor("dot_interval")
 	self.radius = self:GetAbility():GetSpecialValueFor("radius")
 	self.debuff_duration = self:GetAbility():GetSpecialValueFor("debuff_duration")
 	self.bonus_armor_pct = self:GetAbility():GetSpecialValueFor("bonus_armor_pct")
+	if IsServer() then
+		self:OnIntervalThink()
+	end
 end
 function modifier_death_knight_frost_shield:OnIntervalThink()
 	if IsServer() then
@@ -61,7 +66,7 @@ function modifier_death_knight_frost_shield:OnIntervalThink()
                 ApplyDamage({
                     victim = enemy,
                     attacker = hCaster,
-                    damage = (self.damage + self.ap_factor) * self.dot_interval,
+                    damage = hCaster:GetDamageforAbility(true) * self.ap_factor * 0.01,
                     damage_type = DAMAGE_TYPE_MAGICAL,
                     ability = hAbility,
                     damage_flags = DOTA_DAMAGE_FLAG_DIRECT,

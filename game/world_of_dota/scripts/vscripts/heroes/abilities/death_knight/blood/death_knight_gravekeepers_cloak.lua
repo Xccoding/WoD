@@ -36,9 +36,12 @@ end
 function modifier_death_knight_gravekeepers_cloak:OnCreated(params)
 	self.stack_per_tick = self:GetAbility():GetSpecialValueFor("stack_per_tick")
 	self.cloak_cooldown = self:GetAbility():GetSpecialValueFor("cloak_cooldown")
-	self.bonus_armor_factor = self:GetAbility():GetSpecialValueFor("bonus_armor_factor")
+	self.bonus_armor_str_factor = self:GetAbility():GetSpecialValueFor("bonus_armor_str_factor")
 	self.max_stack = self:GetAbility():GetSpecialValueFor("max_stack")
+	self.first_stack = self:GetAbility():GetSpecialValueFor("first_stack")
+	self.bonus_attack_speed = self:GetAbility():GetSpecialValueFor("bonus_attack_speed")
 	self.fNext_stack_time = 0.00
+	self.IsInCombat = false
 	if IsServer() then
 		self:StartIntervalThink(0)
 	end
@@ -46,8 +49,11 @@ end
 function modifier_death_knight_gravekeepers_cloak:OnRefresh(params)
 	self.stack_per_tick = self:GetAbility():GetSpecialValueFor("stack_per_tick")
 	self.cloak_cooldown = self:GetAbility():GetSpecialValueFor("cloak_cooldown")
-	self.bonus_armor_factor = self:GetAbility():GetSpecialValueFor("bonus_armor_factor")
+	self.bonus_armor_str_factor = self:GetAbility():GetSpecialValueFor("bonus_armor_str_factor")
 	self.max_stack = self:GetAbility():GetSpecialValueFor("max_stack")
+	self.first_stack = self:GetAbility():GetSpecialValueFor("first_stack")
+	self.bonus_attack_speed = self:GetAbility():GetSpecialValueFor("bonus_attack_speed")
+	self.IsInCombat = false
 end
 function modifier_death_knight_gravekeepers_cloak:OnIntervalThink()
 	local hCaster = self:GetCaster()
@@ -65,10 +71,23 @@ function modifier_death_knight_gravekeepers_cloak:OnIntervalThink()
 					ParticleManager:SetParticleControl(self.cloak_particle, 5, Vector(1, 0, 0))
 				end
 
-				self:SetStackCount(self:GetStackCount() + self.stack_per_tick)
+				--进战斗直接给9层
+				if self.IsInCombat == false then
+					self:SetStackCount(self:GetStackCount() + self.first_stack)
+					self.IsInCombat = true
+				else
+					self:SetStackCount(self:GetStackCount() + self.stack_per_tick)
+				end
+
+				if self:GetStackCount() > self.max_stack then
+					self:SetStackCount(self.max_stack)
+				end
+				
 				-- hCaster:AddNewModifier(hCaster, hAbility, "modifier_death_knight_gravekeepers_cloak_passive", {count = self.stack_per_tick})
 				self.fNext_stack_time = GameRules:GetGameTime() + self.cloak_cooldown
 			end
+		else
+			self.IsInCombat = false
 		end
 	end
 
@@ -86,13 +105,13 @@ function modifier_death_knight_gravekeepers_cloak:DeclareFunctions()
 end
 function modifier_death_knight_gravekeepers_cloak:GetModifierPhysicalArmorBonus()
 	if self:GetStackCount() > 0 then
-		return self.bonus_armor_factor * self:GetParent():GetLevel() * 0.01
+		return self.bonus_armor_str_factor * self:GetParent():GetStrength() * 0.01
 	end
 	return 0
 end
 function modifier_death_knight_gravekeepers_cloak:GetModifierAttackSpeedBonus_Constant()
 	if self:GetStackCount() > 0 then
-		return self.bonus_armor_factor * self:GetParent():GetLevel() * 0.01
+		return self.bonus_attack_speed * self:GetParent():GetLevel() * 0.01
 	end
 	return 0
 end

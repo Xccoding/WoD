@@ -28,8 +28,8 @@
 		"Ability2"	"death_knight_frost_nova"
 		"Ability3"	"death_knight_frost_shield"
 		"Ability4"	"death_knight_bulldoze"
-		"Ability5"	"death_knight_reality_rift"
-		"Ability6"	"death_knight_borrowed_time"
+		"Ability5"	"death_knight_sonic_wave"
+		"Ability6"	"death_knight_flamethrower"
 
 		"Ability10"	""
 		"Ability11"	""

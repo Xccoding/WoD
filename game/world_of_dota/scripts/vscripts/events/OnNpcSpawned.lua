@@ -1,4 +1,4 @@
-LinkLuaModifier( "modifier_common", "combat/common/modifiers/modifier_common.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_common", "common/combat/modifiers/modifier_common.lua", LUA_MODIFIER_MOTION_NONE )
 
 function CAddonTemplateGameMode:OnNpcSpawned( params )
     local unit = EntIndexToHScript(params.entindex)

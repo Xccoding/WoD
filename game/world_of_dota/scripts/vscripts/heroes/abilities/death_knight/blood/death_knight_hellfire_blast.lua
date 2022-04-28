@@ -62,16 +62,18 @@ function death_knight_hellfire_blast:blast(hTarget)
     EmitSoundOn("Hero_SkeletonKing.Hellfire_Blast", hCaster)
 end
 function death_knight_hellfire_blast:OnProjectileHit_ExtraData(hTarget, vLocation, ExtraData)
+    if not IsServer() then
+        return
+    end
     local hCaster = self:GetCaster()
     local blast_Target = hTarget
-    local damage_hit = self:GetSpecialValueFor("damage_hit")
     local ap_factor_hit = self:GetSpecialValueFor("ap_factor_hit")
     local debuff_duration = self:GetSpecialValueFor("debuff_duration")
 
     ApplyDamage({
 		victim = blast_Target,
 		attacker = hCaster,
-		damage = damage_hit + ap_factor_hit,
+		damage = hCaster:GetDamageforAbility(true) * ap_factor_hit * 0.01,
 		damage_type = DAMAGE_TYPE_PHYSICAL,
 		ability = self,
 		damage_flags = DOTA_DAMAGE_FLAG_DIRECT,
@@ -123,30 +125,37 @@ function modifier_death_knight_hellfire_blast:OnAttackLanded(params)
     end
 end
 function modifier_death_knight_hellfire_blast:OnCreated(params)
-    self.damage_dot = self:GetAbility():GetSpecialValueFor("damage_dot")
     self.ap_factor_dot= self:GetAbility():GetSpecialValueFor("ap_factor_dot")
     self.dot_interval= self:GetAbility():GetSpecialValueFor("dot_interval")
     self.reset_chance= self:GetAbility():GetSpecialValueFor("reset_chance")
 
     if IsServer() then
         self:StartIntervalThink(self.dot_interval)
+        self:OnIntervalThink()
+    end
+end
+function modifier_death_knight_hellfire_blast:OnRefresh(params)
+    self.ap_factor_dot= self:GetAbility():GetSpecialValueFor("ap_factor_dot")
+    self.dot_interval= self:GetAbility():GetSpecialValueFor("dot_interval")
+    self.reset_chance= self:GetAbility():GetSpecialValueFor("reset_chance")
+
+    if IsServer() then
+        self:OnIntervalThink()
     end
 end
 function modifier_death_knight_hellfire_blast:OnIntervalThink()
     if IsServer() then
         local hCaster = self:GetCaster()
         local blast_Target = self:GetParent()
-        local damage_dot = self:GetAbility():GetSpecialValueFor("damage_dot")
-        local ap_factor_dot = self:GetAbility():GetSpecialValueFor("ap_factor_dot")
-        local fDamage = damage_dot + ap_factor_dot
+        local fDamage = hCaster:GetDamageforAbility(true) * self.ap_factor_dot * 0.01
 
         ApplyDamage({
             victim = blast_Target,
             attacker = hCaster,
             damage = fDamage,
-            damage_type = DAMAGE_TYPE_PHYSICAL,
+            damage_type = DAMAGE_TYPE_MAGICAL,
             ability = self,
-            damage_flags = DOTA_DAMAGE_FLAG_DIRECT,
+            damage_flags = DOTA_DAMAGE_FLAG_INDIRECT,
         })
 
         hCaster:CHeal(fDamage, self:GetAbility(), false, true, hCaster, false)

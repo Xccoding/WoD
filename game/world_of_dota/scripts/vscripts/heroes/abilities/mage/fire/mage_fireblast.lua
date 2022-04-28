@@ -3,25 +3,12 @@ if  mage_fireblast == nil then
 end
 LinkLuaModifier( "modifier_mage_fireblast", "heroes/abilities/mage/fire/mage_fireblast.lua", LUA_MODIFIER_MOTION_NONE )
 --ability
-function mage_fireblast:OnAbilityPhaseStart()
-    local caster = self:GetCaster()
-
-    EmitSoundOn("Hero_OgreMagi.Fireblast.Cast", caster)
-
-    return true
-end
-function mage_fireblast:OnAbilityPhaseInterrupted()
-    local caster = self:GetCaster()
-
-    StopSoundOn("Hero_OgreMagi.Fireblast.Cast", caster)
-
-    return true
+function mage_fireblast:GetIntrinsicModifierName()
+    return "modifier_mage_fireblast"
 end
 function mage_fireblast:OnSpellStart()
-    local caster = self:GetCaster()
+    local hCaster = self:GetCaster()
     local target = self:GetCursorTarget()
-    local duration = self:GetSpecialValueFor("duration")
-    local damage = self:GetSpecialValueFor("damage")
     local sp_factor = self:GetSpecialValueFor("sp_factor")
 
     local iParticleID = ParticleManager:CreateParticle("particles/units/heroes/hero_ogre_magi/ogre_magi_fireblast.vpcf", PATTACH_ABSORIGIN, target)
@@ -31,21 +18,18 @@ function mage_fireblast:OnSpellStart()
 
     EmitSoundOn("Hero_OgreMagi.Fireblast.Target", target)
     
-    target:AddNewModifier(caster, self, "modifier_mage_fireblast", {duration = duration})
     ApplyDamage(
         {
             victim = target,
-			attacker = caster,
-			damage = damage + sp_factor,
+			attacker = hCaster,
+			damage = hCaster:GetDamageforAbility(false) * sp_factor * 0.01,
 			damage_type = DAMAGE_TYPE_MAGICAL,
 			ability = self,
 			damage_flags = DOTA_DAMAGE_FLAG_DIRECT,
         }
     )
-
-
 end
---modifiers
+--火焰爆轰必爆modifiers
 if modifier_mage_fireblast == nil then
 	modifier_mage_fireblast = class({})
 end
@@ -53,27 +37,21 @@ function modifier_mage_fireblast:IsHidden()
     return false
 end
 function modifier_mage_fireblast:IsDebuff()
-    return true
+    return false
 end 
 function modifier_mage_fireblast:IsPurgable()
-    return true
+    return false
 end
-function modifier_mage_fireblast:CheckState()
+function modifier_mage_fireblast:CDeclareFunctions()
     return {
-        [MODIFIER_STATE_STUNNED] = true
+        CMODIFIER_PROPERTY_BONUS_MAGICAL_CRIT_CHANCE_CONSTANT
     }
 end
-function modifier_mage_fireblast:DeclareFunctions()
-    return {
-        MODIFIER_PROPERTY_OVERRIDE_ANIMATION
-    }
-end
-function modifier_mage_fireblast:GetEffectAttachType()
-    return PATTACH_OVERHEAD_FOLLOW
-end
-function modifier_mage_fireblast:GetEffectName()
-    return "particles/generic_gameplay/generic_stunned.vpcf"
-end
-function modifier_mage_fireblast:GetOverrideAnimation()
-    return ACT_DOTA_DISABLED
+function modifier_mage_fireblast:C_GetModifierBonusMagicalCritChance_Constant( params )
+    if params.inflictor ~= nil and params.inflictor == self:GetAbility() then
+        if bit.band(params.damage_flags, DOTA_DAMAGE_FLAG_DIRECT) == DOTA_DAMAGE_FLAG_DIRECT then
+            return 100
+        end
+    end
+    return 0
 end

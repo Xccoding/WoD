@@ -1,7 +1,11 @@
 LinkLuaModifier( "modifier_death_knight_bulldoze", "heroes/abilities/death_knight/frost/death_knight_bulldoze.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_death_knight_bulldoze_passive", "heroes/abilities/death_knight/frost/death_knight_bulldoze.lua", LUA_MODIFIER_MOTION_NONE )
 --Abilities
 if death_knight_bulldoze == nil then
 	death_knight_bulldoze = class({})
+end
+function death_knight_bulldoze:GetIntrinsicModifierName()
+	return "modifier_death_knight_bulldoze_passive"
 end
 function death_knight_bulldoze:OnSpellStart()
 	local hCaster = self:GetCaster()
@@ -73,4 +77,34 @@ function modifier_death_knight_bulldoze:CheckState()
 	return {
 		[MODIFIER_STATE_CANNOT_BE_MOTION_CONTROLLED] = true,
 	}
+end
+--精通Modifiers
+if modifier_death_knight_bulldoze_passive == nil then
+	modifier_death_knight_bulldoze_passive = class({})
+end
+function modifier_death_knight_bulldoze_passive:OnCreated(params)
+	self.str_factor = self:GetAbility():GetSpecialValueFor("str_factor")
+	self.bonus_magic_damage_pct = 0
+	self:SetStackCount(0)
+	self:StartIntervalThink(0)
+end
+function modifier_death_knight_bulldoze_passive:OnRefresh(params)
+	self.str_factor = self:GetAbility():GetSpecialValueFor("str_factor")
+end
+function modifier_death_knight_bulldoze_passive:OnIntervalThink()
+	self.bonus_magic_damage_pct = self:GetCaster():GetStrength() * self.str_factor * 0.01
+end
+function modifier_death_knight_bulldoze_passive:DeclareFunctions()
+	return {
+		MODIFIER_PROPERTY_TOTALDAMAGEOUTGOING_PERCENTAGE,
+		MODIFIER_PROPERTY_TOOLTIP,
+	}
+end
+function modifier_death_knight_bulldoze_passive:GetModifierTotalDamageOutgoing_Percentage( params )
+	if params.damage_type == DAMAGE_TYPE_MAGICAL then
+		return self.bonus_magic_damage_pct
+	end
+end
+function modifier_death_knight_bulldoze_passive:OnTooltip()
+	return self.bonus_magic_damage_pct
 end

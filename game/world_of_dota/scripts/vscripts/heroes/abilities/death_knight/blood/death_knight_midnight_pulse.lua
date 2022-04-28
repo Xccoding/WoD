@@ -53,11 +53,12 @@ function modifier_death_knight_midnight_pulse:GetAuraEntityReject(hEntity)
 end
 function modifier_death_knight_midnight_pulse:OnCreated(params)
 	self.damage_tick = self:GetAbility():GetSpecialValueFor("damage_tick")
-	self.damage= self:GetAbility():GetSpecialValueFor("damage")
 	self.ap_factor = self:GetAbility():GetSpecialValueFor("ap_factor")
 	self.radius = self:GetAbility():GetSpecialValueFor("radius")
+	local hCaster = self:GetCaster()
 	if IsServer() then
 		self:StartIntervalThink(self.damage_tick)
+		self:OnIntervalThink()
 	end
 
 	local particleID = ParticleManager:CreateParticle("particles/units/heroes/death_knight/death_knight_midnight_pulse.vpcf", PATTACH_CUSTOMORIGIN, self:GetCaster())
@@ -68,15 +69,16 @@ function modifier_death_knight_midnight_pulse:OnCreated(params)
 end
 function modifier_death_knight_midnight_pulse:OnIntervalThink()
 	local hCaster = self:GetCaster()
+	local hParent = self:GetParent()
 	if IsServer() then
-		local enemies = FindUnitsInRadius(hCaster:GetTeamNumber(), hCaster:GetAbsOrigin(), nil, self.radius, self:GetAbility():GetAbilityTargetTeam(), self:GetAbility():GetAbilityTargetType(), self:GetAbility():GetAbilityTargetFlags(), FIND_ANY_ORDER, false)
+		local enemies = FindUnitsInRadius(hCaster:GetTeamNumber(), hParent:GetAbsOrigin(), nil, self.radius, self:GetAbility():GetAbilityTargetTeam(), self:GetAbility():GetAbilityTargetType(), self:GetAbility():GetAbilityTargetFlags(), FIND_ANY_ORDER, false)
 		for _, enemy in pairs(enemies) do
 			if enemy ~= nil and enemy:IsAlive() then
 				ApplyDamage({
 					victim = enemy,
 					attacker = hCaster,
-					damage = self.damage + self.ap_factor,
-					damage_type = DAMAGE_TYPE_PHYSICAL,
+					damage = hCaster:GetDamageforAbility(true) * self.ap_factor * 0.01,
+					damage_type = DAMAGE_TYPE_MAGICAL,
 					ability = self,
 					damage_flags = DOTA_DAMAGE_FLAG_DIRECT,
 				})

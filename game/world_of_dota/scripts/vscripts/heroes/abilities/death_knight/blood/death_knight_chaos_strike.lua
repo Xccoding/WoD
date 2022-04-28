@@ -18,7 +18,7 @@ function modifier_death_knight_chaos_strike:IsDebuff()
 	return false
 end
 function modifier_death_knight_chaos_strike:IsHidden()
-	return true
+	return false
 end
 function modifier_death_knight_chaos_strike:IsPurgable()
 	return false
@@ -26,21 +26,24 @@ end
 function modifier_death_knight_chaos_strike:OnCreated(params)
     self.records = {}
     self.damage_records = {}
-    self.damage = self:GetAbility():GetSpecialValueFor("damage")
     self.ap_factor = self:GetAbility():GetSpecialValueFor("ap_factor")
     self.heal_percent = self:GetAbility():GetSpecialValueFor("heal_percent")
     self.min_heal_percent = self:GetAbility():GetSpecialValueFor("min_heal_percent")
     self.damage_record_time = self:GetAbility():GetSpecialValueFor("damage_record_time")
-    self.shield_percent = self:GetAbility():GetSpecialValueFor("shield_percent")
+    self.str_factor = self:GetAbility():GetSpecialValueFor("str_factor")
     self.shield_duration = self:GetAbility():GetSpecialValueFor("shield_duration")
+    if IsServer() then
+        self.shield_pct = self.str_factor * self:GetParent():GetStrength() * 0.01
+        self:SetHasCustomTransmitterData(true)
+        self:StartIntervalThink(0)
+    end
 end
 function modifier_death_knight_chaos_strike:OnRefresh(params)
-    self.damage = self:GetAbility():GetSpecialValueFor("damage")
     self.ap_factor = self:GetAbility():GetSpecialValueFor("ap_factor")
     self.heal_percent = self:GetAbility():GetSpecialValueFor("heal_percent")
     self.min_heal_percent = self:GetAbility():GetSpecialValueFor("min_heal_percent")
     self.damage_record_time = self:GetAbility():GetSpecialValueFor("damage_record_time")
-    self.shield_percent = self:GetAbility():GetSpecialValueFor("shield_percent")
+    self.str_factor = self:GetAbility():GetSpecialValueFor("str_factor")
     self.shield_duration = self:GetAbility():GetSpecialValueFor("shield_duration")
 end
 function modifier_death_knight_chaos_strike:DeclareFunctions()
@@ -51,13 +54,34 @@ function modifier_death_knight_chaos_strike:DeclareFunctions()
 		MODIFIER_EVENT_ON_ATTACK_LANDED,
 		MODIFIER_EVENT_ON_ATTACK_RECORD_DESTROY,
         MODIFIER_EVENT_ON_TAKEDAMAGE,
+        MODIFIER_PROPERTY_TOOLTIP,
 	}
+end
+function modifier_death_knight_chaos_strike:OnIntervalThink()
+    if IsServer() then
+        self.shield_pct = self.str_factor * self:GetParent():GetStrength() * 0.01
+        self:SendBuffRefreshToClients()
+    end
+end
+function modifier_death_knight_chaos_strike:AddCustomTransmitterData()
+    return {
+        shield_pct = self.shield_pct
+    }
+end
+function modifier_death_knight_chaos_strike:HandleCustomTransmitterData( data )
+    self.shield_pct = data.shield_pct
+end
+function modifier_death_knight_chaos_strike:OnTooltip()
+    return self.shield_pct
 end
 function modifier_death_knight_chaos_strike:OnAttackStart(params)
     if params.attacker == self:GetParent() then  
     end
 end
 function modifier_death_knight_chaos_strike:OnAttack(params)
+    if not IsServer() then
+        return
+    end
     if params.attacker == self:GetParent() then
         if self:CheckUseOrb(params.record) then
             local hCaster = self:GetCaster()
@@ -69,6 +93,9 @@ function modifier_death_knight_chaos_strike:OnAttack(params)
     end
 end
 function modifier_death_knight_chaos_strike:OnAttackRecord(params)
+    if not IsServer() then
+        return
+    end
     if params.attacker == self:GetParent() then
         local hCaster = self:GetCaster()
         local hAbility = self:GetAbility()
@@ -84,6 +111,9 @@ function modifier_death_knight_chaos_strike:OnAttackRecord(params)
     end
 end
 function modifier_death_knight_chaos_strike:OnAttackLanded(params)
+    if not IsServer then
+        return
+    end
     if params.attacker == self:GetParent() then
         if self:CheckUseOrb(params.record) then
             local hCaster = self:GetCaster()
@@ -94,7 +124,7 @@ function modifier_death_knight_chaos_strike:OnAttackLanded(params)
             ApplyDamage({
 				victim = hTarget,
 				attacker = hCaster,
-				damage = self.damage + self.ap_factor,
+				damage = hCaster:GetDamageforAbility(true) * self.ap_factor * 0.01,
 				damage_type = DAMAGE_TYPE_PHYSICAL,
 				ability = hAbility,
 				damage_flags = DOTA_DAMAGE_FLAG_DIRECT,
@@ -119,12 +149,15 @@ function modifier_death_knight_chaos_strike:OnAttackLanded(params)
 
             hCaster:CHeal(fAmount, hAbility, false, true, hCaster, false)
 
-            hCaster:AddNewModifier(hCaster, hAbility, "modifier_death_knight_chaos_strike_shield", {shield = fAmount * self.shield_percent * 0.01,duration = self.shield_duration})
+            hCaster:AddNewModifier(hCaster, hAbility, "modifier_death_knight_chaos_strike_shield", {shield = fAmount * self.shield_pct * 0.01,duration = self.shield_duration})
 
         end
     end
 end
 function modifier_death_knight_chaos_strike:OnAttackRecordDestroy(params)
+    if not IsServer() then
+        return
+    end
     if params.attacker == self:GetParent() then
         if params.record then
             self:RemoveRecord(params.record)
@@ -132,6 +165,9 @@ function modifier_death_knight_chaos_strike:OnAttackRecordDestroy(params)
     end
 end
 function modifier_death_knight_chaos_strike:OnTakeDamage(params)
+    if not IsServer() then
+        return
+    end
     if self:GetParent() == params.unit then
         local hCaster = params.unit
         local damage_record = {fAmount = params.damage, fEndtime = GameRules:GetGameTime() + self.damage_record_time}
@@ -158,11 +194,13 @@ end
 function modifier_death_knight_chaos_strike_shield:DeclareFunctions()
 	return {
         MODIFIER_PROPERTY_TOTAL_CONSTANT_BLOCK,
+        MODIFIER_PROPERTY_TOOLTIP,
 	}
 end
 function modifier_death_knight_chaos_strike_shield:OnCreated(params)
     local hCaster = self:GetParent()
     if IsServer() then
+        self:SetHasCustomTransmitterData( true )
         self.shield = params.shield
         local particleID = ParticleManager:CreateParticle("particles/units/heroes/hero_abaddon/abaddon_aphotic_shield.vpcf", PATTACH_ABSORIGIN_FOLLOW, hCaster)
         ParticleManager:SetParticleControlEnt(particleID, 0, hCaster, PATTACH_POINT_FOLLOW, "attach_hitloc", hCaster:GetAbsOrigin(), false)
@@ -176,18 +214,31 @@ function modifier_death_knight_chaos_strike_shield:OnRefresh(params)
     local hCaster = self:GetParent()
     if IsServer() then
         self.shield = self.shield + params.shield
+        self:SendBuffRefreshToClients()
     end
 end
 function modifier_death_knight_chaos_strike_shield:GetModifierTotal_ConstantBlock(params)
     if params.damage_type == DAMAGE_TYPE_PHYSICAL then
-        if IsServer() then
-            if params.damage >= self.shield then
-                self:Destroy()
-                return self.shield
-            else
-                self.shield = self.shield - params.damage
-                return params.damage
-            end
+        if params.damage >= self.shield then
+            self:Destroy()
+            return self.shield
+        else
+            self.shield = self.shield - params.damage
+            self:SendBuffRefreshToClients()
+            return params.damage
         end
     end
+end
+function modifier_death_knight_chaos_strike_shield:AddCustomTransmitterData()
+	local data = {
+		shield = self.shield,
+	}
+
+	return data
+end
+function modifier_death_knight_chaos_strike_shield:HandleCustomTransmitterData( data )
+	self.shield = data.shield
+end
+function modifier_death_knight_chaos_strike_shield:OnTooltip()
+    return self.shield
 end
