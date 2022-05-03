@@ -6,18 +6,20 @@
 		"BaseClass"	"ability_lua"
 		"AbilityTextureName"	"ogre_magi_fireblast"
 		"ScriptFile"	"heroes/abilities/mage/fire/mage_fireblast"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
 
-		"AbilityCooldown"				"10"
+		"AbilityCooldown"				"0.5"
 		"AbilityManaCost"				"65"
 		"AbilityCastRange"				"900"
 		"AbilityCastRangeBuffer"		"250"
 		//"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		//"AbilityCastPoint"				"0.3"
+		"AbilityCharges"				"2"
+		"AbilityChargeRestoreTime"		"12"
 		
 
 		"precache"
@@ -44,7 +46,7 @@
 		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
         "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 
-		"AbilityCooldown"				"0"
+		"AbilityCooldown"				"1"
 		"AbilityManaCost"				"10"
 		"AbilityCastRange"				"850"
 		"AbilityCastRangeBuffer"		"250"
@@ -66,7 +68,7 @@
         }
 	}
 
-	//火法烈焰风暴
+	//火法光击阵
     "mage_light_strike_array"
 	{
 		"BaseClass"	"ability_lua"
@@ -76,7 +78,7 @@
 		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
-		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_YES"
+		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
 		"AnimationPlaybackRate"	"0.4"
 
 		"AbilityCooldown"				"6"
@@ -144,14 +146,14 @@
 		"BaseClass"	"ability_lua"
 		"AbilityTextureName"	"lina_fiery_soul"
 		"ScriptFile"	"heroes/abilities/mage/fire/mage_fiery_soul"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		//"AbilityUnitDamageType"	"DAMAGE_TYPE_PHYSICAL"
 		//"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_YES"
         "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 
-		"AbilityCooldown"				"50"
+		"AbilityCooldown"				"60"
 		"AbilityManaCost"				"0"
 		//"AbilityCastRange"				"500"
 		//"AbilityCastRangeBuffer"		"250"
@@ -184,11 +186,11 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitDamageType"	"DAMAGE_TYPE_PHYSICAL"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
         "SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 
-		"AbilityCooldown"				"1.5"
+		"AbilityCooldown"				"0.5"
 		"AbilityManaCost"				"10"
 		"AbilityCastRange"				"900"
 		"AbilityCastRangeBuffer"		"250"
@@ -208,17 +210,215 @@
         {
 			"sp_factor"	"90"
 			"dot_interval"	"1"
-			"ap_factor_dot"	"8"
 			"duration"			"9"
 			"radius"			"300"
 			"int_factor"	"6"
 			"int_factor_tooltip"	"0.06"
-			"speed"	"1000"
+			"speed"	"1600"
 			"combo_multiple"	"200"
         }
 	}
 
+	//奥法奥术天球
+	"mage_arcane_orb"
+	{
+		"BaseClass"	"ability_lua"
+		"AbilityTextureName"	"obsidian_destroyer_arcane_orb"
+		"ScriptFile"	"heroes/abilities/mage/arcane/mage_arcane_orb"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_TOGGLE"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
+        "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 
+		"AbilityCooldown"				"1"
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"850"
+		"AbilityCastRangeBuffer"		"250"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"				"0.3"
+		
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_obsidian_destroyer.vsndevts"
+		}
 
+		"AbilityValues"
+        {
+            "sp_factor"  "46"
+			"attack_range_override"	"850"
+			"attack_time_override"	"2.25"
+			"projectile_speed"	"1000"
+			"damage_pct"	"100"
+			"bonus_crit_chance"	"10"
+			"mana_cost_pct"	"2.75"
+			"stack_per_time"	"1"
+			"arcane_mana_cost_pct"	"100"
+			"arcane_bonus_damage_pct"	"60"
+			"arcane_bonus_attack_time"	"8"
+			"max_stack"	"4"
+        }
+	}
+
+	//奥法震荡光弹
+	"mage_concussive_shot"
+	{
+		"BaseClass"	"ability_lua"
+		"AbilityTextureName"	"skywrath_mage_concussive_shot"
+		"ScriptFile"	"heroes/abilities/mage/arcane/mage_concussive_shot"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE | DOTA_UNIT_TARGET_FLAG_NO_INVIS"
+		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
+        "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+
+		"AbilityCooldown"				"3"
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"900"
+		"AbilityCastRangeBuffer"		"250"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
+		"AbilityCastPoint"				"0.2"
+		
+
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_skywrath_mage.vsndevts"
+		}
+
+		"AbilityValues"
+        {
+			"sp_factor"  "73"
+			"radius"	"900"
+			"target_count"	"1"
+			"damage_per_stack"	"30"
+			"speed"	"1700"
+			"arcane_bonus_damage_pct"	"30"
+			"arcane_bonus_target_count"	"1"
+			"arcane_mana_get_pct"	"1.5"
+			"max_stack"	"4"
+			"stack_per_time"	"1"
+			"tooltip_orb_damage_pct"	"60"
+			"tooltip_orb_mana_pct"	"100"
+			"tooltip_orb_attack_time"	"8"
+        }
+	}
+
+	//奥法共鸣脉冲
+	"mage_resonant_pulse"
+	{
+		"BaseClass"	"ability_lua"
+		"AbilityTextureName"	"mage_resonant_pulse"
+		"ScriptFile"	"heroes/abilities/mage/arcane/mage_resonant_pulse"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE | DOTA_UNIT_TARGET_FLAG_NO_INVIS"
+		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
+        "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+
+		"AbilityCooldown"				"1"
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"400"
+		"AbilityCastRangeBuffer"		"250"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
+		"AbilityCastPoint"				"0.2"
+		
+
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_void_spirit.vsndevts"
+		}
+
+		"AbilityValues"
+        {
+			"sp_factor"  "50"
+			"radius"	"400"
+			"mana_cost_pct"	"10"
+			"stack_per_time"	"1"
+        }
+	}
+
+	//奥法奥法鹰隼
+	"mage_arcane_bolt"
+	{
+		"BaseClass"	"ability_lua"
+		"AbilityTextureName"	"skywrath_mage_arcane_bolt"
+		"ScriptFile"	"heroes/abilities/mage/arcane/mage_arcane_bolt"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
+        "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+
+		"AbilityCooldown"				"1"
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"900"
+		"AbilityCastRangeBuffer"		"250"
+		//"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+		//"AbilityCastPoint"				"0.0"
+		
+
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_skywrath_mage.vsndevts"
+		}
+
+		"AbilityValues"
+        {
+			"sp_factor"	"41"
+			"base_count"	"5"
+			"bolt_count"	"5"
+			"duration"			"2.5"
+			"energy_chance"	"2.5"
+			"energy_threshold"	"1"
+			"energy_duration_reduce_pct"	"16"
+			"energy_bonus_count"	"1"
+			"speed"	"1200"
+			"buff_duration"	"15"
+			"mana_cost_pct"	"15"
+			"stack_per_time"	"1"
+			"max_stack"	"2"
+        }
+	}
+
+	//奥法上古封印
+	"mage_ancient_seal"
+	{
+		"BaseClass"	"ability_lua"
+		"AbilityTextureName"	"skywrath_mage_ancient_seal"
+		"ScriptFile"	"heroes/abilities/mage/arcane/mage_ancient_seal"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
+        "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+
+		"AbilityCooldown"				"45"
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"900"
+		"AbilityCastRangeBuffer"		"250"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"				"0.25"
+		
+
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_skywrath_mage.vsndevts"
+		}
+
+		"AbilityValues"
+        {
+			"save_pct"	"25"
+			"radius"	"400"
+			"duration"	"8"
+			"mana_cost_pct"	"5"
+        }
+	}
 
 }

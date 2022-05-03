@@ -3,6 +3,14 @@ LinkLuaModifier( "modifier_mage_light_strike_array", "heroes/abilities/mage/fire
 if mage_light_strike_array == nil then
 	mage_light_strike_array = class({})
 end
+function mage_light_strike_array:GetCastAnimation()
+	local hCaster = self:GetCaster()
+	if hCaster:GetUnitName() == "npc_dota_hero_lina" then
+		return ACT_DOTA_CAST_ABILITY_2
+	elseif hCaster:GetUnitName() == "npc_dota_hero_silencer" then
+		return ACT_DOTA_CAST_ABILITY_1
+	end
+end
 function mage_light_strike_array:GetAOERadius()
 	return self:GetSpecialValueFor("radius")
 end

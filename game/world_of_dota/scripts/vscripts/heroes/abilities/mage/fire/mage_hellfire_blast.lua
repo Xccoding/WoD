@@ -4,6 +4,14 @@ end
 LinkLuaModifier( "modifier_mage_hellfire_blast", "heroes/abilities/mage/fire/mage_hellfire_blast.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_mage_hellfire_blast_debuff", "heroes/abilities/mage/fire/mage_hellfire_blast.lua", LUA_MODIFIER_MOTION_NONE )
 --ability
+function mage_hellfire_blast:GetCastAnimation()
+	local hCaster = self:GetCaster()
+	if hCaster:GetUnitName() == "npc_dota_hero_lina" then
+		return ACT_DOTA_CAST_ABILITY_1
+	elseif hCaster:GetUnitName() == "npc_dota_hero_silencer" then
+		return ACT_DOTA_ATTACK
+	end
+end
 function mage_hellfire_blast:GetIntrinsicModifierName()
     return "modifier_mage_hellfire_blast"
 end
@@ -47,7 +55,7 @@ function mage_hellfire_blast:OnProjectileHit_ExtraData(hTarget, vLocation, Extra
     for _, enemy in pairs(enemies) do
         if enemy ~= nil and enemy:IsAlive() then
             ApplyDamage({
-                victim = hTarget,
+                victim = enemy,
                 attacker = hCaster,
                 damage = hCaster:GetDamageforAbility(false) * sp_factor * 0.01,
                 damage_type = DAMAGE_TYPE_MAGICAL,
@@ -71,7 +79,7 @@ function mage_hellfire_blast:OnProjectileHit_ExtraData(hTarget, vLocation, Extra
     ParticleManager:SetParticleControl(particleID, 1, Vector(radius, 0, 0))
     ParticleManager:ReleaseParticleIndex(particleID)
 
-    EmitSoundOn("Hero_SkeletonKing.Hellfire_BlastImpact", hCaster)
+    EmitSoundOn("Hero_SkeletonKing.Hellfire_BlastImpact", hTarget)
 end
 --液态火监控modifiers
 if modifier_mage_hellfire_blast == nil then
@@ -170,6 +178,7 @@ function modifier_mage_hellfire_blast_debuff:OnCreated(params)
     self.dot_interval= self:GetAbility():GetSpecialValueFor("dot_interval")
     if IsServer() then
         self.damage_pool = params.damage_pool
+        self.damage_tick = 0
         self:SetHasCustomTransmitterData(true)
         self:StartIntervalThink(self.dot_interval)
         self:OnIntervalThink()
@@ -188,29 +197,35 @@ end
 function modifier_mage_hellfire_blast_debuff:OnIntervalThink()
     if IsServer() then
         local hCaster = self:GetCaster()
-        local blast_Target = self:GetParent()
-        local fDamage = math.max(self.damage_pool / (self:GetRemainingTime() / self.dot_interval + 1), 1)
+        local Target = self:GetParent()
+        local fDamage = math.max(self.damage_pool / (math.floor(self:GetRemainingTime() + 0.5) / self.dot_interval + 1) , 1)
 
         ApplyDamage({
-            victim = blast_Target,
+            victim = Target,
             attacker = hCaster,
             damage = fDamage,
             damage_type = DAMAGE_TYPE_MAGICAL,
             ability = self:GetAbility(),
             damage_flags = DOTA_DAMAGE_FLAG_INDIRECT,
         })
-
-        self.damage_pool = self.damage_pool - fDamage
+        self.damage_pool = self.damage_pool - self.damage_pool / (math.floor(self:GetRemainingTime() + 0.5) / self.dot_interval + 1)
+        self.damage_tick = self.damage_pool / (math.floor(self:GetRemainingTime() + 0.5) / self.dot_interval + 1)
+        self:SendBuffRefreshToClients()
     end
 end
 function modifier_mage_hellfire_blast_debuff:AddCustomTransmitterData()
     return {
-        damage_pool = self.damage_pool
+        damage_tick = self.damage_tick
     }
 end
 function modifier_mage_hellfire_blast_debuff:HandleCustomTransmitterData( data )
-    self.damage_pool = data.damage_pool
+    self.damage_tick = data.damage_tick
+end
+function modifier_mage_hellfire_blast_debuff:DeclareFunctions()
+    return {
+        MODIFIER_PROPERTY_TOOLTIP
+    }
 end
 function modifier_mage_hellfire_blast_debuff:OnTooltip()
-    return math.max(self.damage_pool / (self:GetRemainingTime() / self.dot_interval + 1), 1)
+    return self.damage_tick
 end

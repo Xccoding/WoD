@@ -29,15 +29,16 @@ function BaseNPC:GetUnitAttribute(attrName, params)
     return attr
 end
 
---获取技能伤害基数
-function BaseNPC:GetDamageforAbility( bIsAP )
-    local dmg = self:GetAverageTrueAttackDamage(self)
-    --TODO判断计算攻击力还是法强
-    if bIsAP then
-        dmg = self:GetAverageTrueAttackDamage(self)
-    else
-        dmg = 50
+if IsServer() then
+    --获取技能伤害基数
+    function CDOTA_BaseNPC:GetDamageforAbility( bIsAP )
+        local dmg = self:GetAverageTrueAttackDamage(self)
+        --TODO判断计算攻击力还是法强
+        if bIsAP then
+            dmg = self:GetAverageTrueAttackDamage(self)
+        else
+            dmg = self:GetIntellect()
+        end
+        return dmg
     end
-
-    return dmg
 end

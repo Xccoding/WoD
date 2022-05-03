@@ -50,7 +50,7 @@
 "DOTA_Tooltip_modifier_death_knight_frost_shield_slow_down_Description"	"移动速度降低"
 
 "DOTA_Tooltip_ability_death_knight_bulldoze"	"威吓"
-"DOTA_Tooltip_ability_death_knight_bulldoze_Description"	"主动：冰霜能量使你的力量提高%bonus_str_pct%%%，且免疫任何强制位移效果（不论敌我），持续%duration%秒。<br>威吓期间每次本命一击使你的力量额外提高%stack_mortal_strike%%%，每次寒霜爆发和冰霜魔盾使你的力量额外提高%stack_others%%%。\n被动：使你造成的魔法伤害提高一定百分比，数值为你力量的%str_factor%%%。"
+"DOTA_Tooltip_ability_death_knight_bulldoze_Description"	"主动：冰霜能量使你的力量提高%bonus_str_pct%%%，且免疫任何强制位移效果（不论敌我），持续%duration%秒。<br>威吓期间每次本命一击使你的力量额外提高%stack_mortal_strike%%%，每次寒霜爆发和冰霜魔盾使你的力量额外提高%stack_others%%%。\n被动：使你造成的魔法伤害提高【%str_factor_tooltip% x 力量】。"
 "DOTA_Tooltip_modifier_death_knight_bulldoze"	"威吓"
 "DOTA_Tooltip_modifier_death_knight_bulldoze_Description"	"力量提高%dMODIFIER_PROPERTY_TOOLTIP%%%"
 "DOTA_Tooltip_modifier_death_knight_bulldoze_passive"	"威吓：魔法伤害提高"

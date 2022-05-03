@@ -34,7 +34,7 @@ if modifier_mage_fireblast == nil then
 	modifier_mage_fireblast = class({})
 end
 function modifier_mage_fireblast:IsHidden()
-    return false
+    return true
 end
 function modifier_mage_fireblast:IsDebuff()
     return false

@@ -2,6 +2,14 @@ if  mage_laguna_blade == nil then
     mage_laguna_blade = class({})
 end
 --ability
+function mage_laguna_blade:GetCastAnimation()
+	local hCaster = self:GetCaster()
+	if hCaster:GetUnitName() == "npc_dota_hero_lina" then
+		return ACT_DOTA_CAST_ABILITY_4
+	elseif hCaster:GetUnitName() == "npc_dota_hero_silencer" then
+		return ACT_DOTA_CAST_ABILITY_3
+	end
+end
 function mage_laguna_blade:GetBehavior()
     local hCaster = self:GetCaster()
     if hCaster:HasModifier("modifier_mage_fiery_soul_combo") then

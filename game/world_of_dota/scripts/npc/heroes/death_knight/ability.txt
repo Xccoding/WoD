@@ -166,8 +166,8 @@
 		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitDamageType"	"DAMAGE_TYPE_PHYSICAL"
-		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
-        "SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_YES"
+        "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 
 		"AbilityCooldown"				"10"
 		"AbilityManaCost"				"5"
@@ -377,6 +377,7 @@
 			"stack_mortal_strike"	"2"
 			"stack_others"	"1"
 			"str_factor"	"16"
+			"str_factor_tooltip"	"0.16"
         }
 	}
 

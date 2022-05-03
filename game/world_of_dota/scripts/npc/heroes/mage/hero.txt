@@ -20,4 +20,25 @@
 		"Ability17"	""
 		"Ability18"	""
 	}
+
+	"npc_dota_hero_arcane_mage"
+	{
+        "override_hero" "npc_dota_hero_silencer"
+		"Ability1"	"mage_arcane_orb"
+		"Ability2"	"mage_concussive_shot"
+		"Ability3"	"mage_resonant_pulse"
+		"Ability4"	"mage_arcane_bolt"
+		"Ability5"	"mage_fiery_soul"
+		"Ability6"	"mage_hellfire_blast"
+
+		"Ability10"	""
+		"Ability11"	""
+		"Ability12"	""
+		"Ability13"	""
+		"Ability14"	""
+		"Ability15"	""
+		"Ability16"	""
+		"Ability17"	""
+		"Ability18"	""
+	}
 }

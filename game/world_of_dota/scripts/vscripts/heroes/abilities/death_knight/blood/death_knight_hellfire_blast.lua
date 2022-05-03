@@ -81,7 +81,7 @@ function death_knight_hellfire_blast:OnProjectileHit_ExtraData(hTarget, vLocatio
 
     blast_Target:AddNewModifier(hCaster, self, "modifier_death_knight_hellfire_blast", {duration = debuff_duration})
 
-    EmitSoundOn("Hero_SkeletonKing.Hellfire_BlastImpact", hCaster)
+    EmitSoundOn("Hero_SkeletonKing.Hellfire_BlastImpact", blast_Target)
 end
 
 --modifiers
