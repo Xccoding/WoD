@@ -84,11 +84,17 @@ function mage_concussive_shot:OnProjectileHit_ExtraData(hTarget, vLocation, Extr
     local sp_factor = self:GetSpecialValueFor("sp_factor")
     local fDamage = hCaster:GetDamageforAbility(false) * sp_factor * 0.01
     local arcane_bonus_damage_pct = self:GetSpecialValueFor("arcane_bonus_damage_pct")
+    local equilibrium = hCaster:FindAbilityByName("mage_equilibrium")
+	local equilibrium_pct = 0
+
+    if equilibrium ~= nil and equilibrium.equilibrium_pct ~= nil then
+        equilibrium_pct = equilibrium.equilibrium_pct
+    end
 
     ApplyDamage({
 		victim = hTarget,
 		attacker = hCaster,
-		damage =  fDamage * (100 + arcane_bonus_damage_pct * ExtraData.stack) * 0.01,
+		damage =  fDamage * (100 + arcane_bonus_damage_pct * ExtraData.stack + equilibrium_pct) * 0.01,
 		damage_type = DAMAGE_TYPE_MAGICAL,
 		ability = self,
 		damage_flags = DOTA_DAMAGE_FLAG_DIRECT,
@@ -122,9 +128,16 @@ function modifier_mage_concussive_shot:DeclareFunctions()
     }
 end
 function modifier_mage_concussive_shot:OnTooltip()
+    local hCaster = self:GetCaster()
+    local equilibrium = hCaster:FindAbilityByName("mage_equilibrium")
+	local equilibrium_pct = 0
+    if equilibrium ~= nil and equilibrium.equilibrium_pct ~= nil then
+        equilibrium_pct = equilibrium.equilibrium_pct
+    end
+
     self._tooltip = (self._tooltip or 0) % 6 + 1
 	if self._tooltip == 1 then
-		return self.tooltip_orb_damage_pct * self:GetStackCount()
+		return self.tooltip_orb_damage_pct * self:GetStackCount() + equilibrium_pct
 	elseif self._tooltip == 2 then
 		return self.tooltip_orb_mana_pct * self:GetStackCount()
 	elseif self._tooltip == 3 then
@@ -132,7 +145,7 @@ function modifier_mage_concussive_shot:OnTooltip()
     elseif self._tooltip == 4 then
         return self.arcane_bonus_target_count * self:GetStackCount()
     elseif self._tooltip == 5 then
-        return self.arcane_bonus_damage_pct * self:GetStackCount()
+        return self.arcane_bonus_damage_pct * self:GetStackCount() + equilibrium_pct
     elseif self._tooltip == 6 then
         return self.arcane_mana_get_pct * self:GetStackCount()
 	end

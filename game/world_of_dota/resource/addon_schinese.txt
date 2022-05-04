@@ -110,17 +110,28 @@
 		"DOTA_Tooltip_ability_mage_arcane_orb_Description"	"激活后，失去你的全部攻击力，攻击距离固定为%attack_range_override%，攻击间隔提升至%attack_time_override%，将你的攻击替换成高速的奥术法球，法球造成【%sp_factor%%%法术强度】点魔法伤害且具有克敌机先，每次攻击会消耗%mana_cost_pct%%%的最大魔法值，并使你获得%stack_per_time%层奥术至尊。\n奥术至尊：<br>每层使奥术天球的伤害提高%arcane_bonus_damage_pct%%%，消耗的魔法值提高%arcane_mana_cost_pct%%%，攻击间隔降低%arcane_bonus_attack_time%%%；最多叠加%max_stack%层。"
 		
 		"DOTA_Tooltip_ability_mage_concussive_shot"	"震荡光弹"
-		"DOTA_Tooltip_ability_mage_concussive_shot_Description"	"主动：向视野内最近的%target_count%名敌人发射光弹，造成【%sp_factor%%%法术强度】点魔法伤害。同时消耗你的所有奥术至尊层数，每消耗一层：增加%arcane_bonus_target_count%个额外目标，使光弹的伤害增加%arcane_bonus_damage_pct%%%，并为你恢复%arcane_mana_get_pct%%%最大魔法值。\n被动：每次命中敌人的共鸣脉冲或奥术天球都会使你获得%stack_per_time%层奥术至尊，强化你的技能。"
+		"DOTA_Tooltip_ability_mage_concussive_shot_Description"	"主动：向视野内最近的%target_count%名敌人发射光弹，造成【%sp_factor%%%法术强度】点魔法伤害。同时消耗你的所有奥术至尊层数，每消耗一层：增加%arcane_bonus_target_count%个额外目标，使光弹的伤害增加%arcane_bonus_damage_pct%%%，并为你恢复%arcane_mana_get_pct%%%最大魔法值。\n被动：每次命中敌人的共鸣脉冲或奥术天球都会使你获得%stack_per_time%层奥术至尊，强化你的技能；最多叠加%max_stack%层。"
 		"DOTA_Tooltip_modifier_mage_concussive_shot"	"奥术至尊"
-		"DOTA_Tooltip_modifier_mage_concussive_shot_Description"	"使奥术天球的伤害提高%dMODIFIER_PROPERTY_TOOLTIP%%%，魔法消耗提高%dMODIFIER_PROPERTY_TOOLTIP%%%，攻击间隔减少%fMODIFIER_PROPERTY_TOOLTIP%%%；<br>使震荡光弹额外击中%dMODIFIER_PROPERTY_TOOLTIP%个目标，伤害提高%dMODIFIER_PROPERTY_TOOLTIP%%%，为你恢复%fMODIFIER_PROPERTY_TOOLTIP%%%最大魔法值"
+		"DOTA_Tooltip_modifier_mage_concussive_shot_Description"	"使奥术天球的伤害提高%dMODIFIER_PROPERTY_TOOLTIP%%%，魔法消耗提高%dMODIFIER_PROPERTY_TOOLTIP%%%，攻击间隔减少%dMODIFIER_PROPERTY_TOOLTIP%%%；<br>使震荡光弹额外击中%dMODIFIER_PROPERTY_TOOLTIP%个目标，伤害提高%dMODIFIER_PROPERTY_TOOLTIP%%%，为你恢复%fMODIFIER_PROPERTY_TOOLTIP%%%最大魔法值"
 		
 		"DOTA_Tooltip_ability_mage_resonant_pulse"	"共鸣脉冲"
-		"DOTA_Tooltip_ability_mage_resonant_pulse_Description"	"对周身释放一道脉冲，对%%radius范围内的敌人造成【%sp_factor%%%法术强度】点魔法伤害。<br>如果击中了至少一名敌人，共鸣脉冲会增加%stack_per_time%层奥术至尊层数。"
+		"DOTA_Tooltip_ability_mage_resonant_pulse_Description"	"对周身释放一道脉冲，对%radius%范围内的敌人造成【%sp_factor%%%法术强度】点魔法伤害。<br>如果共鸣脉冲击中了至少一名敌人，使你增加%stack_per_time%层奥术至尊层数。"
 		
 		"DOTA_Tooltip_ability_mage_arcane_bolt"	"奥法鹰隼"
 		"DOTA_Tooltip_ability_mage_arcane_bolt_Description"	"主动：持续施法-向目标连续发射%base_count%枚奥术鹰隼，每枚造成【%sp_factor%%%法术强度】点魔法伤害。\n被动：每消耗%energy_threshold%%%的最大魔法值，就有%energy_chance%%%几率使你获得%stack_per_time%层奥术。\n奥术：<br>使你的下一次共鸣脉冲或奥法鹰隼不消耗魔法值，并使奥法鹰隼的施法时间减少%energy_duration_reduce_pct%%%，同时增加%energy_bonus_count%枚鹰隼数量。最多叠加%max_stack%层。"
 		"DOTA_Tooltip_modifier_mage_arcane_bolt"	"奥术"
 		"DOTA_Tooltip_modifier_mage_arcane_bolt_Description"	"使你的下%dMODIFIER_PROPERTY_TOOLTIP%次共鸣脉冲或奥法鹰隼不消耗魔法值，同时强化奥法鹰隼"
+		
+		"DOTA_Tooltip_ability_mage_ancient_seal"	"上古封印"
+		"DOTA_Tooltip_ability_mage_ancient_seal_Description"	"用上古符文标记一个目标，累积你对目标伤害的%save_pct%%%，持续%duration%秒；标记结束时会释放一道神智冲击波，对%radius%范围内的所有敌人造成已累积的伤害。施放时使你立即获得%stack_per_time%层奥术至尊。"
+		"DOTA_Tooltip_modifier_mage_ancient_seal"	"上古封印"
+		"DOTA_Tooltip_modifier_mage_ancient_seal_Description"	"已经累积%dMODIFIER_PROPERTY_TOOLTIP%点魔法伤害"
+		
+		"DOTA_Tooltip_ability_mage_equilibrium"	"精华变迁"
+		"DOTA_Tooltip_ability_mage_equilibrium_Description"	"主动：持续施法-使你获得%bonus_mana_regen_pct%%%的魔法恢复增强，持续%duration%秒。\n被动：使你的最大魔法值提高【%max_mana_int_factor% x 智力】%%，并获得同等的魔法恢复增强。同时使奥术至尊的伤害提高效果增强【%arcane_buff_bonus_damage% x 智力】%%"
+		"DOTA_Tooltip_modifier_mage_equilibrium"	"精华变迁"
+		"DOTA_Tooltip_modifier_mage_equilibrium_Description"	"最大魔法值提升%fMODIFIER_PROPERTY_EXTRA_MANA_PERCENTAGE%%%，获得%fMODIFIER_PROPERTY_MP_REGEN_AMPLIFY_PERCENTAGE%%%的魔法恢复增强，奥术至尊的伤害提升效果增强%dMODIFIER_PROPERTY_TOOLTIP%%%"
+		
 
 
 	}

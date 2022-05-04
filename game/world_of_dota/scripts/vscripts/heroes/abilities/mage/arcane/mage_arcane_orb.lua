@@ -87,14 +87,20 @@ function modifier_mage_arcane_orb:OnAttackLanded( params )
 		local hAbility = self:GetAbility()
 		local arcane_buff = hCaster:FindModifierByName("modifier_mage_concussive_shot")
 		local fDamage = hCaster:GetDamageforAbility(false) * self.sp_factor * 0.01
+		local equilibrium = hCaster:FindAbilityByName("mage_equilibrium")
+		local equilibrium_pct = 0
 		if hTarget:IsNull() or hTarget == nil or (not hTarget:IsAlive()) then
 			return
 		end
 		if self:CheckUseOrb( params.record ) then
 			EmitSoundOn("Hero_ObsidianDestroyer.ArcaneOrb.Impact", hTarget)
-			if arcane_buff ~= nil then
-				fDamage = fDamage * (100 + self.arcane_bonus_damage_pct * arcane_buff:GetStackCount()) * 0.01
+			if equilibrium ~= nil and equilibrium.equilibrium_pct ~= nil then
+				equilibrium_pct = equilibrium.equilibrium_pct
 			end
+			if arcane_buff ~= nil then
+				fDamage = fDamage * (100 + self.arcane_bonus_damage_pct * arcane_buff:GetStackCount() + equilibrium_pct) * 0.01
+			end
+			
 			ApplyDamage({
 					victim = hTarget,
 					attacker = hCaster,

@@ -28,8 +28,8 @@
 		"Ability2"	"mage_concussive_shot"
 		"Ability3"	"mage_resonant_pulse"
 		"Ability4"	"mage_arcane_bolt"
-		"Ability5"	"mage_fiery_soul"
-		"Ability6"	"mage_hellfire_blast"
+		"Ability5"	"mage_ancient_seal"
+		"Ability6"	"mage_equilibrium"
 
 		"Ability10"	""
 		"Ability11"	""

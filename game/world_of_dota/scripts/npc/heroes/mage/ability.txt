@@ -410,6 +410,7 @@
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_skywrath_mage.vsndevts"
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_obsidian_destroyer.vsndevts"
 		}
 
 		"AbilityValues"
@@ -418,6 +419,43 @@
 			"radius"	"400"
 			"duration"	"8"
 			"mana_cost_pct"	"5"
+			"stack_per_time"	"4"
+        }
+	}
+
+	//奥法精华变迁
+	"mage_equilibrium"
+	{
+		"BaseClass"	"ability_lua"
+		"AbilityTextureName"	"obsidian_destroyer_equilibrium"
+		"ScriptFile"	"heroes/abilities/mage/arcane/mage_equilibrium"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_NO"
+        "SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+
+		"AbilityCooldown"				"90"
+		"AbilityManaCost"				"0"
+		//"AbilityCastRange"				"900"
+		//"AbilityCastRangeBuffer"		"250"
+		//"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+		//"AbilityCastPoint"				"0.0"
+		
+
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_obsidian_destroyer.vsndevts"
+		}
+
+		"AbilityValues"
+        {
+			"mana_regen_int_factor"	"10"
+			"max_mana_int_factor"	"10"
+			"arcane_buff_bonus_damage"	"4"
+			"duration"			"6"
+			"bonus_mana_regen_pct"	"750"
         }
 	}
 

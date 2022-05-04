@@ -10,7 +10,7 @@ end
 function mage_arcane_bolt:GetChannelTime()
     local hCaster = self:GetCaster()
     if self.arcane_bolt_buff ~= nil and self.arcane_bolt_buff > 0 then
-        return self:GetSpecialValueFor("energy_duration") * (100 - self:GetSpecialValueFor("energy_duration_reduce_pct")) * 0.01
+        return self:GetSpecialValueFor("duration") * (100 - self:GetSpecialValueFor("energy_duration_reduce_pct")) * 0.01
     end
     return self:GetSpecialValueFor("duration")
 end
@@ -101,6 +101,9 @@ function modifier_mage_arcane_bolt:IsDebuff()
 end 
 function modifier_mage_arcane_bolt:IsPurgable()
     return false
+end
+function modifier_mage_arcane_bolt:GetAttributes()
+    return MODIFIER_ATTRIBUTE_PERMANENT
 end
 function modifier_mage_arcane_bolt:DeclareFunctions()
     return {
