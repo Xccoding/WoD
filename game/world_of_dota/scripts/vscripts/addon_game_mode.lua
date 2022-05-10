@@ -26,9 +26,16 @@ function CAddonTemplateGameMode:InitGameMode()
 	require('common.combat.managers.combat_manager')
 	require('events.OnNpcSpawned')
 	require('utils')
+	require('heroes.label.schools')
+	require('ai.ai_manager')
 
 	--设定监听事件
 	ListenToGameEvent('npc_spawned',Dynamic_Wrap(CAddonTemplateGameMode,'OnNpcSpawned'),self)
+
+	--游戏性测试
+	GameRules:GetGameModeEntity():SetCustomAttributeDerivedStatValue(DOTA_ATTRIBUTE_STRENGTH_HP, 0)
+	GameRules:GetGameModeEntity():SetCustomAttributeDerivedStatValue(DOTA_ATTRIBUTE_AGILITY_ATTACK_SPEED, 0)
+	GameRules:GetGameModeEntity():SetCustomAttributeDerivedStatValue(DOTA_ATTRIBUTE_INTELLIGENCE_MANA, 0)
 
 	print( "Template addon is loaded." )
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 2 )

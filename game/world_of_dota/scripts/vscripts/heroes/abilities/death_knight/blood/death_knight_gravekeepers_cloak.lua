@@ -41,8 +41,8 @@ function modifier_death_knight_gravekeepers_cloak:OnCreated(params)
 	self.first_stack = self:GetAbility():GetSpecialValueFor("first_stack")
 	self.bonus_attack_speed = self:GetAbility():GetSpecialValueFor("bonus_attack_speed")
 	self.fNext_stack_time = 0.00
-	self.IsInCombat = false
 	if IsServer() then
+		self.IsInCombat = false
 		self:StartIntervalThink(0)
 	end
 end
@@ -53,7 +53,9 @@ function modifier_death_knight_gravekeepers_cloak:OnRefresh(params)
 	self.max_stack = self:GetAbility():GetSpecialValueFor("max_stack")
 	self.first_stack = self:GetAbility():GetSpecialValueFor("first_stack")
 	self.bonus_attack_speed = self:GetAbility():GetSpecialValueFor("bonus_attack_speed")
-	self.IsInCombat = false
+	if IsServer() then
+		self.IsInCombat = false
+	end
 end
 function modifier_death_knight_gravekeepers_cloak:OnIntervalThink()
 	local hCaster = self:GetCaster()
@@ -111,7 +113,7 @@ function modifier_death_knight_gravekeepers_cloak:GetModifierPhysicalArmorBonus(
 end
 function modifier_death_knight_gravekeepers_cloak:GetModifierAttackSpeedBonus_Constant()
 	if self:GetStackCount() > 0 then
-		return self.bonus_attack_speed * self:GetParent():GetLevel() * 0.01
+		return self.bonus_attack_speed
 	end
 	return 0
 end

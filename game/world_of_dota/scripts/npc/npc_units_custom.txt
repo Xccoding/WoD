@@ -1,4 +1,6 @@
 // Units File
+#base creatures/neutral/unit.txt
+
 "DOTAUnits"
 {
 	"Version"	"1"
@@ -35,7 +37,7 @@
 		"AttackDamageMax"			"36"		// Damage range max.
 		"AttackRate"				"1.6"		// Speed of attack.
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
+		"AttackAcquisitionRange"	"0"		// Range within a target can be acquired.
 		"AttackRange"				"500"		// Range within a target can be attacked.
 		"ProjectileModel"			"particles/neutral_fx/gnoll_base_attack.vpcf" // Particle system model for projectile.
 		"ProjectileSpeed"			"1500"		// Speed of projectile.		     
@@ -54,12 +56,12 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"270"		// Speed.			
+		"MovementSpeed"				"220"		// Speed.			
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"75"		// Base health.
-		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
+		"StatusHealth"				"75000"		// Base health.
+		"StatusHealthRegen"			"50"		// Health regeneration rate.
 		"StatusMana"				"0"			// Base mana.
 		"StatusManaRegen"			"0.0"		// Mana regeneration rate.		 
 		
@@ -88,5 +90,6 @@
 			"BountyGain"				"3"
 			"XPGain"					"15"
 		}
+		"vscripts"					"ai/ai_aggro_normal.lua"
 	}
 }

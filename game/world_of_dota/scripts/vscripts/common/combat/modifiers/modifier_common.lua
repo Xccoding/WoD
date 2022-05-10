@@ -1,7 +1,7 @@
 COMBAT_STATUS_TIME = 6--战斗状态持续时间
 
 require('modifiers.Cmodifier')
-require('units.attribute_manager')
+require('common.attribute_manager')
 
 --通用modifiers
 if modifier_common == nil then
@@ -20,6 +20,7 @@ function modifier_common:DeclareFunctions()
     return {
         MODIFIER_EVENT_ON_TAKEDAMAGE,
         MODIFIER_PROPERTY_TOTALDAMAGEOUTGOING_PERCENTAGE,
+        MODIFIER_EVENT_ON_TAKEDAMAGE_KILLCREDIT,
     }
 end
 function modifier_common:RemoveOnDeath()
@@ -28,13 +29,17 @@ end
 function modifier_common:OnCreated(params)
     self.damage_records = {}
 end
+function modifier_common:OnTakeDamageKillCredit(params)
+    local hAttacker = params.attacker
+    local hVictim = params.target
+    
+    hAttacker:AddNewModifier(hAttacker, nil, "modifier_combat", {duration = COMBAT_STATUS_TIME})
+    hVictim:AddNewModifier(hVictim, nil, "modifier_combat", {duration = COMBAT_STATUS_TIME})
+end
 function modifier_common:OnTakeDamage(params)
     local hAttacker = params.attacker
     local hVictim = params.unit
     local number_length = math.floor(math.log(math.floor(params.damage),10) + 1)
-
-    hAttacker:AddNewModifier(hAttacker, nil, "modifier_combat", {duration = COMBAT_STATUS_TIME})
-    hVictim:AddNewModifier(hVictim, nil, "modifier_combat", {duration = COMBAT_STATUS_TIME})
 
     -- for index = 1, #self.damage_records do
     --     print(self.damage_records[index].crit, self.damage_records[index].record)

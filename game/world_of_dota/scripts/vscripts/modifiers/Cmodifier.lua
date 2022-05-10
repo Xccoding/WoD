@@ -3,6 +3,8 @@ CMODIFIER_EVENT_ON_ATTACK_CRIT = "C_OnAttackCrit"--攻击暴击
 CMODIFIER_EVENT_ON_ATTACK_NOTCRIT = "C_OnAttackNotCrit"--攻击未暴击
 CMODIFIER_EVENT_ON_SPELL_CRIT = "C_OnSpellCrit"--技能暴击
 CMODIFIER_EVENT_ON_SPELL_NOTCRIT = "C_OnSpellNotCrit"--技能未暴击
+CMODIFIER_EVENT_ON_HEAL = "C_OnHeal"--主动输出治疗
+CMODIFIER_EVENT_ON_HEALED = "C_OnHealed"--被动承受治疗
 --自定义属性函数
 CMODIFIER_PROPERTY_BONUS_PHYSICAL_CRIT_CHANCE_CONSTANT = "C_GetModifierBonusPhysicalCritChance_Constant"--物理暴击几率加算
 CMODIFIER_PROPERTY_BONUS_MAGICAL_CRIT_CHANCE_CONSTANT = "C_GetModifierBonusMagicalCritChance_Constant"--魔法暴击几率加算

@@ -1,0 +1,4 @@
+"DOTA_Tooltip_ability_neutral_creep_track"	"追踪术"
+"DOTA_Tooltip_ability_neutral_creep_track_Description"	"追踪目标，获得目标的视野，并且降低其护甲值"
+"DOTA_Tooltip_modifier_neutral_creep_track"	"追踪术"
+"DOTA_Tooltip_modifier_neutral_creep_track_Description"	"暴露在敌人的视野下，护甲%dMODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS%"

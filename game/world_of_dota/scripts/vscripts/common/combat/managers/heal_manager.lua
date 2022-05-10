@@ -18,6 +18,8 @@ function BaseNPC:CHeal(amount, inflictor, lifesteal, amplify, source, spellLifes
     ParticleManager:ReleaseParticleIndex(particleID)
 
     self:HealWithParams(amount, inflictor, lifesteal, amplify, source, spellLifesteal)
+    CFireModifierEvent(source, CMODIFIER_EVENT_ON_HEAL, {amount = amount, inflictor = inflictor, lifesteal = lifesteal, amplify = amplify, source = source, spellLifesteal = spellLifesteal})
+    CFireModifierEvent(self, CMODIFIER_EVENT_ON_HEALED, {amount = amount, inflictor = inflictor, lifesteal = lifesteal, amplify = amplify, source = source, spellLifesteal = spellLifesteal})
 end
 
 function BaseNPC:CGiveMana(amount, inflictor, source)

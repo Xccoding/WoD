@@ -133,6 +133,12 @@
 		"DOTA_Tooltip_modifier_mage_equilibrium_Description"	"最大魔法值提升%fMODIFIER_PROPERTY_EXTRA_MANA_PERCENTAGE%%%，获得%fMODIFIER_PROPERTY_MP_REGEN_AMPLIFY_PERCENTAGE%%%的魔法恢复增强，奥术至尊的伤害提升效果增强%dMODIFIER_PROPERTY_TOOLTIP%%%"
 		
 
+		//schinese/abilities/neutral.txt
+		"DOTA_Tooltip_ability_neutral_creep_track"	"追踪术"
+		"DOTA_Tooltip_ability_neutral_creep_track_Description"	"追踪目标，获得目标的视野，并且降低其护甲值"
+		"DOTA_Tooltip_modifier_neutral_creep_track"	"追踪术"
+		"DOTA_Tooltip_modifier_neutral_creep_track_Description"	"暴露在敌人的视野下，护甲%dMODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS%"
+
 
 	}
 }

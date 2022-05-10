@@ -3,6 +3,8 @@
 #base heroes/mage/ability.txt
 #base heroes/death_knight/ability.txt
 
+#base creatures/neutral/ability.txt
+
 "DOTAAbilities"
 {
 	"Version"		"1"
