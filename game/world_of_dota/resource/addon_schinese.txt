@@ -138,6 +138,51 @@
 		"DOTA_Tooltip_ability_neutral_creep_track_Description"	"追踪目标，获得目标的视野，并且降低其护甲值"
 		"DOTA_Tooltip_modifier_neutral_creep_track"	"追踪术"
 		"DOTA_Tooltip_modifier_neutral_creep_track_Description"	"暴露在敌人的视野下，护甲%dMODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS%"
+		
+		"DOTA_Tooltip_ability_neutral_creep_envenomed_weapon"	"浸毒武器"
+		"DOTA_Tooltip_ability_neutral_creep_envenomed_weapon_Description"	"攻击附带毒素，使目标持续受到伤害，并且攻击有概率落空"
+		"DOTA_Tooltip_modifier_neutral_creep_envenomed_weapon_debuff"	"浸毒武器"
+		"DOTA_Tooltip_modifier_neutral_creep_envenomed_weapon_debuff_Description"	"持续受到伤害，攻击有%dMODIFIER_PROPERTY_MISS_PERCENTAGE%%%几率落空"
+
+		//schinese/buildings/shop.txt
+		"shashire_equip_shop"   "沙夏尔装备商人"
+		"DOTA_Subshop_shashire_equip_shop_weapon"   "沙夏尔武器"
+		"DOTA_Subshop_shashire_equip_shop_armor"   "沙夏尔护甲"
+
+		//schinese/items/cape.txt
+		"DOTA_Tooltip_ability_item_abaddon_cape"   "<font color='#BEBEBE'>【普通·背部】</font>魔霭新兵披风"
+		"DOTA_Tooltip_ability_item_abaddon_cape_bonus_armor"   "+$bonus_armor"
+		"DOTA_Tooltip_ability_item_wraith_king_cape"   "<font color='#BEBEBE'>【普通·背部】</font>冥寒新兵披风"
+		"DOTA_Tooltip_ability_item_wraith_king_cape_bonus_armor"   "+$bonus_armor"
+
+		//schinese/items/chest.txt
+		"DOTA_Tooltip_ability_item_wraith_king_chest"   "<font color='#BEBEBE'>【普通·护甲】</font>死亡骑士新兵护甲"
+		"DOTA_Tooltip_ability_item_wraith_king_chest_bonus_armor"   "+$bonus_armor"
+
+		//schinese/items/helmet.txt
+		"DOTA_Tooltip_ability_item_abaddon_helmet"   "<font color='#BEBEBE'>【普通·头部】</font>魔霭新兵头盔"
+		"DOTA_Tooltip_ability_item_abaddon_helmet_bonus_armor"   "+$bonus_armor"
+		"DOTA_Tooltip_ability_item_wraith_king_helmet"   "<font color='#BEBEBE'>【普通·头部】</font>冥寒新兵头盔"
+		"DOTA_Tooltip_ability_item_wraith_king_helmet_bonus_armor"   "+$bonus_armor"
+
+		//schinese/items/shoulder.txt
+		"DOTA_Tooltip_ability_item_abaddon_shoulder"   "<font color='#BEBEBE'>【普通·肩部】</font>魔霭新兵护肩"
+		"DOTA_Tooltip_ability_item_abaddon_shoulder_bonus_armor"   "+$bonus_armor"
+		"DOTA_Tooltip_ability_item_wraith_king_shoulder"   "<font color='#BEBEBE'>【普通·肩部】</font>冥寒新兵护肩"
+		"DOTA_Tooltip_ability_item_wraith_king_shoulder_bonus_armor"   "+$bonus_armor"
+
+		//schinese/items/weapon.txt
+		"dota_ability_variable_bonus_attack"			"攻击力"
+		"dota_ability_variable_bonus_armor"			"护甲"
+		
+		
+		"DOTA_Tooltip_ability_item_abaddon_weapon"   "<font color='#BEBEBE'>【普通·双手剑】</font>死亡骑士新兵长剑"
+		"DOTA_Tooltip_ability_item_abaddon_weapon_bonus_attack"   "+$bonus_attack"
+		"DOTA_Tooltip_ability_item_abaddon_weapon_attack_time"   "基础攻击间隔："
+		
+		"DOTA_Tooltip_ability_item_wraith_king_weapon"   "<font color='#BEBEBE'>【普通·双手剑】</font>死亡骑士新兵大剑"
+		"DOTA_Tooltip_ability_item_wraith_king_weapon_bonus_attack"   "+$bonus_attack"
+		"DOTA_Tooltip_ability_item_wraith_king_weapon_attack_time"   "基础攻击间隔："
 
 
 	}

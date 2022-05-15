@@ -10,7 +10,7 @@
 		"Ability5"	"death_knight_reality_rift"
 		"Ability6"	"death_knight_borrowed_time"
 
-		"Ability10"	"neutral_creep_track"
+		"Ability10"	""
 		"Ability11"	""
 		"Ability12"	""
 		"Ability13"	""
@@ -22,7 +22,7 @@
 
 		// Armor
 		//-------------------------------------------------------------------------------------------------------------
-		"ArmorPhysical"		"3.94"
+		"ArmorPhysical"		"0"
 		"MagicalResistance"		"0"
 
 		// Attack
@@ -32,7 +32,7 @@
 		"AttackDamageMin"		"0"
 		"AttackDamageMax"		"0"
 		"AttackDamageType"		"DAMAGE_TYPE_ArmorPhysical"
-		"AttackRate"		"1.500000"
+		"AttackRate"		"1.700000"
 		"AttackAnimationPoint"		"0.560000"
 		"AttackAcquisitionRange"		"600"
 		"AttackRange"		"100"

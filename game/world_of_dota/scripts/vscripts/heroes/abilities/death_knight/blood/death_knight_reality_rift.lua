@@ -39,7 +39,7 @@ function death_knight_reality_rift:pull(hTarget)
     local duration = self:GetSpecialValueFor("duration")
 
     FindClearSpaceForUnit(hTarget, vPos, true)
-
+    hTarget:Interrupt()
     local particleID = ParticleManager:CreateParticle("particles/units/heroes/death_knight/death_knight_reality_rift.vpcf", PATTACH_CUSTOMORIGIN, hCaster)
     ParticleManager:SetParticleControlEnt(particleID, 0, hCaster, PATTACH_POINT_FOLLOW, "attach_hitloc", hCaster:GetAbsOrigin(), false)
     ParticleManager:SetParticleControlEnt(particleID, 1, hTarget, PATTACH_POINT_FOLLOW, "attach_hitloc", hTarget:GetAbsOrigin(), false)

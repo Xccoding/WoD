@@ -7,6 +7,10 @@
 --     AI_BEHAVIOR_CAN_KILL = 100
 -- }
 
+MAX_CAMP_RANGE = 800
+MAX_WANDER_RANGE = 500
+COMBAT_FIND_RADIUS = 600
+
 function Spawn()
     if not IsServer() then
 		return
@@ -34,22 +38,72 @@ function NormalThink()
         --print("unit is dead")
         return
     end
-    --战斗判断
+
+    -----------------更新仇恨目标---------------------------
+    --超距返回
+    if (unit:GetAbsOrigin() - unit.spawn_entity:GetAbsOrigin()):Length2D() >= MAX_CAMP_RANGE then
+        if not (unit.current_order.order == DOTA_UNIT_ORDER_MOVE_TO_POSITION and unit.current_order.bForce == false) then
+            NewWander(true)
+            unit:C_ClearAggroTarget()
+            unit:RemoveModifierByName("modifier_combat")
+            unit:AddNewModifier(unit, nil, "modifier_escape", {duration = 0.25})
+            return 0.25
+        else
+            if unit.current_order.fEndtime >= GameRules:GetGameTime() then
+                NewWander(true)
+                unit:C_ClearAggroTarget()
+                unit:RemoveModifierByName("modifier_combat")
+                unit:AddNewModifier(unit, nil, "modifier_escape", {duration = 0.25})
+                return 0.25
+            end
+        end
+    else
+        if unit.current_order.order == DOTA_UNIT_ORDER_MOVE_TO_POSITION and unit.current_order.bForce == true and (unit:GetAbsOrigin() - unit.spawn_entity:GetAbsOrigin()):Length2D() >= MAX_WANDER_RANGE then
+            NewWander(true)
+            unit:C_ClearAggroTarget()
+            unit:RemoveModifierByName("modifier_combat")
+            unit:AddNewModifier(unit, nil, "modifier_escape", {duration = 0.25})
+            return 0.25
+        end
+    end
+    --未超距，判断根据什么条件更新
+    if unit:InCombat() then
+        unit:C_RefreshAggroTarget(AI_GET_TARGET_ORDER_DHPS, math.max(unit:GetAcquisitionRange(), COMBAT_FIND_RADIUS))
+    else
+        if unit:GetAcquisitionRange() > 0 then
+            unit:C_RefreshAggroTarget(AI_GET_TARGET_ORDER_RANGE, math.max(unit:GetAcquisitionRange(), COMBAT_FIND_RADIUS))
+        else
+            unit:C_ClearAggroTarget()
+        end
+    end
+    -----------------战斗行为----------------------------
+    --非战斗中
     if not unit:InCombat() then
-        if unit.wander_type ~= nil then
+        --主动攻击距离>0，会主动攻击
+        if unit:C_GetAggroTarget() ~= nil then
+            if unit:GetAttackCapability() ~= DOTA_UNIT_CAP_NO_ATTACK then
+                ExecuteOrderFromTable({
+                    UnitIndex = unit:entindex(),
+                    OrderType = DOTA_UNIT_ORDER_ATTACK_TARGET,
+                    TargetIndex = unit:C_GetAggroTarget():entindex(),
+                    Queue = false,
+                })
+                unit.current_order = {order = DOTA_UNIT_ORDER_ATTACK_TARGET, fEndtime = GameRules:GetGameTime() + 1}
+                return 0.25
+            end
+        end
+        if unit.wander_type ~= nil then 
+            --是否会主动游荡
             if unit.wander_type == AI_WANDER_TYPE_ACTIVE then
-                if unit.current_order.order == nil then
+                if unit.current_order.order == nil or (unit.current_order.order ~= nil and unit.current_order.fEndtime < GameRules:GetGameTime()) then
                     -- print("new wander")
-                    NewWander()
-                elseif unit.current_order.fEndtime < GameRules:GetGameTime() then
-                    -- print("new wander")
-                    NewWander()
+                    NewWander(false)
                 end
             end
         end
         return 0.25
     end
-    ------------------无旧行为执行中-----------------
+    ------------------战斗中-----------------
     if unit.current_order.order == nil or (unit.current_order.order ~= nil and unit.current_order.fEndtime < GameRules:GetGameTime()) or unit.current_order.order == DOTA_UNIT_ORDER_MOVE_TO_POSITION then
         ------------------需要新行为-------------------
         local desires = {}
@@ -151,7 +205,7 @@ function NormalThink()
             ExecuteOrderFromTable(
                 order_table
             )
-            unit.current_order = {order = order_table.OrderType, fEndtime = GameRules:GetGameTime() + 2}
+            unit.current_order = {order = order_table.OrderType, fEndtime = GameRules:GetGameTime() + 2, bForce = false}
         elseif #max_desires == 0 then
             --找单位A
             if unit:GetAttackCapability() == DOTA_UNIT_CAP_NO_ATTACK then
@@ -161,7 +215,7 @@ function NormalThink()
                     OrderType = DOTA_UNIT_ORDER_NONE,
                     Queue = false,
                 })
-                unit.current_order = {order = DOTA_UNIT_ORDER_ATTACK_TARGET, fEndtime = GameRules:GetGameTime() + 0.5}
+                unit.current_order = {order = DOTA_UNIT_ORDER_ATTACK_TARGET, fEndtime = GameRules:GetGameTime() + 0.5, bForce = false}
             else
                 --可以攻击
                 if unit:C_GetAggroTarget() ~= nil then
@@ -171,7 +225,7 @@ function NormalThink()
                         TargetIndex = unit:C_GetAggroTarget():entindex(),
                         Queue = false,
                     })
-                    unit.current_order = {order = DOTA_UNIT_ORDER_ATTACK_TARGET, fEndtime = GameRules:GetGameTime() + 2}
+                    unit.current_order = {order = DOTA_UNIT_ORDER_ATTACK_TARGET, fEndtime = GameRules:GetGameTime() + 1, bForce = false}
                 end
             end
         end
@@ -181,7 +235,7 @@ function NormalThink()
     return 0.25
 end
 
-function NewWander()
+function NewWander(bForce)
     local unit = thisEntity
     local spawn_entity = unit.spawn_entity
     local pos = spawn_entity:GetAbsOrigin() + RandomVector(RandomFloat(0, 500))
@@ -190,8 +244,8 @@ function NewWander()
         UnitIndex = unit:entindex(),
         OrderType = DOTA_UNIT_ORDER_MOVE_TO_POSITION,
         Position = pos,
-        Queue = true,
+        Queue = not bForce,
     })
-    unit.current_order = {order = DOTA_UNIT_ORDER_MOVE_TO_POSITION, fEndtime = GameRules:GetGameTime() + time}
+    unit.current_order = {order = DOTA_UNIT_ORDER_MOVE_TO_POSITION, fEndtime = GameRules:GetGameTime() + time, bForce = bForce}
 end
 

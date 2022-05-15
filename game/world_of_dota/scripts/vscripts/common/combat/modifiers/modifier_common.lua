@@ -21,6 +21,8 @@ function modifier_common:DeclareFunctions()
         MODIFIER_EVENT_ON_TAKEDAMAGE,
         MODIFIER_PROPERTY_TOTALDAMAGEOUTGOING_PERCENTAGE,
         MODIFIER_EVENT_ON_TAKEDAMAGE_KILLCREDIT,
+        MODIFIER_EVENT_ON_MODIFIER_ADDED,
+        MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT,
     }
 end
 function modifier_common:RemoveOnDeath()
@@ -28,13 +30,46 @@ function modifier_common:RemoveOnDeath()
 end
 function modifier_common:OnCreated(params)
     self.damage_records = {}
+    if IsServer() then
+        self:SetHasCustomTransmitterData(true)
+        self.base_attack_time = 1.70
+        -- self:StartIntervalThink(1)
+    end
+end
+function modifier_common:OnIntervalThink()
+    if IsServer() then
+        -- self.base_attack_time = self:GetParent():GetUnitAttribute(BASE_ATTACK_TIME, {}, MODIFIER_CALCULATE_TYPE_MAX)
+        -- self:SendBuffRefreshToClients()
+        -- print("s", self.base_attack_time)
+    end
+end
+function modifier_common:AddCustomTransmitterData()
+    return {
+        base_attack_time = self.base_attack_time
+    }
+end
+function modifier_common:HandleCustomTransmitterData(data)
+    self.base_attack_time = data.base_attack_time
 end
 function modifier_common:OnTakeDamageKillCredit(params)
     local hAttacker = params.attacker
     local hVictim = params.target
     
-    hAttacker:AddNewModifier(hAttacker, nil, "modifier_combat", {duration = COMBAT_STATUS_TIME})
-    hVictim:AddNewModifier(hVictim, nil, "modifier_combat", {duration = COMBAT_STATUS_TIME})
+    if not (hVictim:HasModifier("modifier_escape") or hAttacker:HasModifier("modifier_escape")) then
+        hAttacker:AddNewModifier(hAttacker, nil, "modifier_combat", {duration = COMBAT_STATUS_TIME})
+        hVictim:AddNewModifier(hVictim, nil, "modifier_combat", {duration = COMBAT_STATUS_TIME})
+    end
+end
+function modifier_common:OnModifierAdded( params )
+    if params.unit == self:GetParent() then
+        local tBuff = params.added_buff
+        local hCaster = tBuff:GetCaster()
+        local hParent = self:GetParent()
+        if tBuff:GetName() == "modifier_taunt_custom" and not (hParent:HasModifier("modifier_escape") or hCaster:HasModifier("modifier_escape")) then
+            hCaster:AddNewModifier(hCaster, nil, "modifier_combat", {duration = COMBAT_STATUS_TIME})
+            hParent:AddNewModifier(hParent, nil, "modifier_combat", {duration = COMBAT_STATUS_TIME})
+        end
+    end
 end
 function modifier_common:OnTakeDamage(params)
     local hAttacker = params.attacker
@@ -92,20 +127,20 @@ function modifier_common:GetModifierTotalDamageOutgoing_Percentage( params )
 
     local hAttacker = params.attacker
     local hVictim = params.target
-
+    
     --普通攻击伤害
     if params.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then
         local crit_chance = 0
         if params.damage_type == DAMAGE_TYPE_PHYSICAL then
-            crit_chance = hAttacker:GetUnitAttribute(BONUS_PHYSICAL_CRIT_CHANCE, params)
+            crit_chance = hAttacker:GetUnitAttribute(BONUS_PHYSICAL_CRIT_CHANCE, params, MODIFIER_CALCULATE_TYPE_SUM)
         else
-            crit_chance = hAttacker:GetUnitAttribute(BONUS_MAGICAL_CRIT_CHANCE, params)
+            crit_chance = hAttacker:GetUnitAttribute(BONUS_MAGICAL_CRIT_CHANCE, params, MODIFIER_CALCULATE_TYPE_SUM)
         end
         if RandomFloat(0, 100) < crit_chance then
             table.insert(self.damage_records, {crit = true, record = params.record})
             CFireModifierEvent(hAttacker, CMODIFIER_EVENT_ON_ATTACK_CRIT, params)
             CFireModifierEvent(hVictim, CMODIFIER_EVENT_ON_ATTACK_CRIT, params)
-            return 50
+            return 50--TODO暴击伤害倍率修改
         else
             table.insert(self.damage_records, {crit = false, record = params.record})
             CFireModifierEvent(hAttacker, CMODIFIER_EVENT_ON_ATTACK_NOTCRIT, params)
@@ -118,9 +153,9 @@ function modifier_common:GetModifierTotalDamageOutgoing_Percentage( params )
     if params.damage_category == DOTA_DAMAGE_CATEGORY_SPELL then
         local crit_chance = 0
         if params.damage_type == DAMAGE_TYPE_PHYSICAL then
-            crit_chance = hAttacker:GetUnitAttribute(BONUS_PHYSICAL_CRIT_CHANCE, params)
+            crit_chance = hAttacker:GetUnitAttribute(BONUS_PHYSICAL_CRIT_CHANCE, params, MODIFIER_CALCULATE_TYPE_SUM)
         else
-            crit_chance = hAttacker:GetUnitAttribute(BONUS_MAGICAL_CRIT_CHANCE, params)
+            crit_chance = hAttacker:GetUnitAttribute(BONUS_MAGICAL_CRIT_CHANCE, params, MODIFIER_CALCULATE_TYPE_SUM)
         end
         if RandomFloat(0, 100) < crit_chance then
             --print("数值暴击")
@@ -137,8 +172,19 @@ function modifier_common:GetModifierTotalDamageOutgoing_Percentage( params )
         end
     end
 
-    
-
-    
-
+end
+function modifier_common:GetModifierBaseAttackTimeConstant()
+    --print("enter")
+    if IsServer() then
+        --print("IsServer")
+        self.base_attack_time = self:GetParent():GetUnitAttribute(BASE_ATTACK_TIME, {}, MODIFIER_CALCULATE_TYPE_MAX)
+        self:SendBuffRefreshToClients()
+        --print("IsServer",self.base_attack_time)
+        return self.base_attack_time
+    end
+    if IsClient() then
+        --print("IsClient")
+        --print("IsClient",self.base_attack_time)
+        return self.base_attack_time
+    end
 end

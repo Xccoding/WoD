@@ -21,12 +21,17 @@ end
 --         MODIFIER_PROPERTY_OVERRIDE_ANIMATION
 --     }
 -- end
--- function modifier_taunt_custom:GetEffectAttachType()
---     return PATTACH_OVERHEAD_FOLLOW
--- end
--- function modifier_taunt_custom:GetEffectName()
---     return "particles/generic_gameplay/generic_stunned.vpcf"
--- end
--- function modifier_taunt_custom:GetOverrideAnimation()
---     return ACT_DOTA_DISABLED
--- end
+function modifier_taunt_custom:OnCreated(params)
+    if IsServer() then
+        local hParent = self:GetParent()
+        local hCaster = self:GetCaster()
+        hParent:C_RefreshAggroTarget(AI_GET_TARGET_ORDER_DHPS)
+    end
+end
+function modifier_taunt_custom:OnRefresh(params)
+    if IsServer() then
+        local hParent = self:GetParent()
+        local hCaster = self:GetCaster()
+        hParent:C_RefreshAggroTarget(AI_GET_TARGET_ORDER_DHPS)
+    end
+end

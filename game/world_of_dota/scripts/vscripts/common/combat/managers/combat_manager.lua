@@ -9,6 +9,8 @@ LinkLuaModifier( "modifier_stun_custom", "common/combat/modifiers/modifier_stun_
 LinkLuaModifier( "modifier_combat", "common/combat/modifiers/modifier_combat.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_taunt_custom", "common/combat/modifiers/modifier_taunt_custom.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_disable_autoattack_custom", "common/combat/modifiers/modifier_disable_autoattack_custom.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_escape", "common/combat/modifiers/modifier_escape.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_hide_aggro", "common/combat/modifiers/modifier_hide_aggro.lua", LUA_MODIFIER_MOTION_NONE )
 
 function CDOTA_BaseNPC:InCombat()
     if self:HasModifier("modifier_combat") then
@@ -44,5 +46,17 @@ function AbilityBehaviorFilter(iBehavior_group, iBehavior)
         return true
     else
         return false
+    end
+end
+original_add_function = CDOTA_BaseNPC.AddNewModifier
+function CDOTA_BaseNPC:AddNewModifier(hCaster, hAbility, sModifierName, params, bIgnoreResistance)
+    bIgnoreResistance = bIgnoreResistance or false
+    if bIgnoreResistance then
+        original_add_function(self, hCaster, hAbility, sModifierName, params)
+    else
+        if params.duration ~= 0 and type(params.duration) == "number" then
+            params.duration = params.duration * ( 100 - self:GetStatusResistance()) * 0.01
+        end
+        original_add_function(self, hCaster, hAbility, sModifierName, params)
     end
 end

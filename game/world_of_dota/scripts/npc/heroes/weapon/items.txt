@@ -1,0 +1,392 @@
+"DOTAAbilities"
+{
+    //魔霭新兵长剑
+    "item_abaddon_weapon"
+	{
+		"BaseClass"						"item_lua"
+		"AbilityTextureName"			"item_abaddon_weapon"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"Model"							"models/heroes/abaddon/weapon.vmdl"
+		"ScriptFile"					"items/weapon/item_abaddon_weapon"
+
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0.0"
+        "AbilityCooldown"				"0.0"
+
+		"ItemCost"						"100"
+		"ItemPurchasable"				"1"
+		"ItemShopTags"					"attack"
+		"ItemQuality"					"component"
+		"ItemStackable"					"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"0"
+		"ItemKillable"					"0"
+        "ItemSellable"					"1"
+		"ItemCastOnPickup"				"0"
+        "AllowedInBackpack"				"0"
+        "ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_NEVER"
+        "IsTempestDoubleClonable"		"0"
+        "ItemIsNeutralDrop"				"0"
+		"ItemDroppable"					"1"
+        "CustomShop"					"1"
+        "SideShop"                      "0"
+        "SecretShop"					"0"
+		"RequiresCustomShop"			"1"
+		"RequiredCustomShopName"		"shashire_equip_shop"
+
+		"AbilityValues"
+        {
+			"bonus_attack"	"3"
+			"attack_time"	"1.75"
+        }	
+	}
+
+    //冥寒新兵大剑
+    "item_wraith_king_weapon"
+	{
+		"BaseClass"						"item_lua"
+		"AbilityTextureName"			"item_wraith_king_weapon"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"Model"							"models/heroes/wraith_king/wraith_king_weapon.vmdl"
+		"ScriptFile"					"items/weapon/item_wraith_king_weapon"
+
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0.0"
+        "AbilityCooldown"				"0.0"
+
+		"ItemCost"						"100"
+		"ItemPurchasable"				"1"
+		"ItemShopTags"					"attack"
+		"ItemQuality"					"component"
+		"ItemStackable"					"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"0"
+		"ItemKillable"					"0"
+        "ItemSellable"					"1"
+		"ItemCastOnPickup"				"0"
+        "AllowedInBackpack"				"0"
+        "ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_NEVER"
+        "IsTempestDoubleClonable"		"0"
+        "ItemIsNeutralDrop"				"0"
+		"ItemDroppable"					"1"
+        "CustomShop"					"1"
+        "SideShop"                      "0"
+        "SecretShop"					"0"
+		"RequiresCustomShop"			"1"
+		"RequiredCustomShopName"		"shashire_equip_shop"
+
+		"AbilityValues"
+        {
+			"bonus_attack"	"3"
+			"attack_time"	"1.75"
+        }	
+	}
+
+	//魔霭新兵头盔
+    "item_abaddon_helmet"
+	{
+		"BaseClass"						"item_lua"
+		"AbilityTextureName"			"item_abaddon_helmet"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"Model"							"models/heroes/abaddon/helmet.vmdl"
+		"ScriptFile"					"items/helmet/item_abaddon_helmet"
+
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0.0"
+        "AbilityCooldown"				"0.0"
+
+		"ItemCost"						"100"
+		"ItemPurchasable"				"1"
+		"ItemShopTags"					"attack"
+		"ItemQuality"					"component"
+		"ItemStackable"					"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"0"
+		"ItemKillable"					"0"
+        "ItemSellable"					"1"
+		"ItemCastOnPickup"				"0"
+        "AllowedInBackpack"				"0"
+        "ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_NEVER"
+        "IsTempestDoubleClonable"		"0"
+        "ItemIsNeutralDrop"				"0"
+		"ItemDroppable"					"1"
+        "CustomShop"					"1"
+        "SideShop"                      "0"
+        "SecretShop"					"0"
+		"RequiresCustomShop"			"1"
+		"RequiredCustomShopName"		"shashire_equip_shop"
+
+		"AbilityValues"
+        {
+			"bonus_armor"	"2"
+        }	
+	}
+
+	//魔霭新兵披风
+    "item_abaddon_cape"
+	{
+		"BaseClass"						"item_lua"
+		"AbilityTextureName"			"item_abaddon_cape"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"Model"							"models/heroes/abaddon/cape.vmdl"
+		"ScriptFile"					"items/cape/item_abaddon_cape"
+
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0.0"
+        "AbilityCooldown"				"0.0"
+
+		"ItemCost"						"100"
+		"ItemPurchasable"				"1"
+		"ItemShopTags"					"attack"
+		"ItemQuality"					"component"
+		"ItemStackable"					"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"0"
+		"ItemKillable"					"0"
+        "ItemSellable"					"1"
+		"ItemCastOnPickup"				"0"
+        "AllowedInBackpack"				"0"
+        "ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_NEVER"
+        "IsTempestDoubleClonable"		"0"
+        "ItemIsNeutralDrop"				"0"
+		"ItemDroppable"					"1"
+        "CustomShop"					"1"
+        "SideShop"                      "0"
+        "SecretShop"					"0"
+		"RequiresCustomShop"			"1"
+		"RequiredCustomShopName"		"shashire_equip_shop"
+
+		"AbilityValues"
+        {
+			"bonus_armor"	"1"
+        }	
+	}
+
+	//魔霭新兵护肩
+    "item_abaddon_shoulder"
+	{
+		"BaseClass"						"item_lua"
+		"AbilityTextureName"			"item_abaddon_shoulder"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"Model"							"models/heroes/abaddon/shoulders.vmdl"
+		"ScriptFile"					"items/shoulder/item_abaddon_shoulder"
+
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0.0"
+        "AbilityCooldown"				"0.0"
+
+		"ItemCost"						"100"
+		"ItemPurchasable"				"1"
+		"ItemShopTags"					"attack"
+		"ItemQuality"					"component"
+		"ItemStackable"					"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"0"
+		"ItemKillable"					"0"
+        "ItemSellable"					"1"
+		"ItemCastOnPickup"				"0"
+        "AllowedInBackpack"				"0"
+        "ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_NEVER"
+        "IsTempestDoubleClonable"		"0"
+        "ItemIsNeutralDrop"				"0"
+		"ItemDroppable"					"1"
+        "CustomShop"					"1"
+        "SideShop"                      "0"
+        "SecretShop"					"0"
+		"RequiresCustomShop"			"1"
+		"RequiredCustomShopName"		"shashire_equip_shop"
+
+		"AbilityValues"
+        {
+			"bonus_armor"	"1"
+        }	
+	}
+
+	//死亡骑士新兵护甲
+    "item_wraith_king_chest"
+	{
+		"BaseClass"						"item_lua"
+		"AbilityTextureName"			"item_wraith_king_chest"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"Model"							"models/heroes/wraith_king/wraith_king_chest.vmdl"
+		"ScriptFile"					"items/chest/item_wraith_king_chest"
+
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0.0"
+        "AbilityCooldown"				"0.0"
+
+		"ItemCost"						"100"
+		"ItemPurchasable"				"1"
+		"ItemShopTags"					"attack"
+		"ItemQuality"					"component"
+		"ItemStackable"					"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"0"
+		"ItemKillable"					"0"
+        "ItemSellable"					"1"
+		"ItemCastOnPickup"				"0"
+        "AllowedInBackpack"				"0"
+        "ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_NEVER"
+        "IsTempestDoubleClonable"		"0"
+        "ItemIsNeutralDrop"				"0"
+		"ItemDroppable"					"1"
+        "CustomShop"					"1"
+        "SideShop"                      "0"
+        "SecretShop"					"0"
+		"RequiresCustomShop"			"1"
+		"RequiredCustomShopName"		"shashire_equip_shop"
+
+		"AbilityValues"
+        {
+			"bonus_armor"	"3"
+        }	
+	}
+
+	//冥寒新兵头盔
+    "item_wraith_king_helmet"
+	{
+		"BaseClass"						"item_lua"
+		"AbilityTextureName"			"item_wraith_king_helmet"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"Model"							"models/heroes/abaddon/helmet.vmdl"
+		"ScriptFile"					"items/helmet/item_abaddon_helmet"
+
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0.0"
+        "AbilityCooldown"				"0.0"
+
+		"ItemCost"						"100"
+		"ItemPurchasable"				"1"
+		"ItemShopTags"					"attack"
+		"ItemQuality"					"component"
+		"ItemStackable"					"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"0"
+		"ItemKillable"					"0"
+        "ItemSellable"					"1"
+		"ItemCastOnPickup"				"0"
+        "AllowedInBackpack"				"0"
+        "ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_NEVER"
+        "IsTempestDoubleClonable"		"0"
+        "ItemIsNeutralDrop"				"0"
+		"ItemDroppable"					"1"
+        "CustomShop"					"1"
+        "SideShop"                      "0"
+        "SecretShop"					"0"
+		"RequiresCustomShop"			"1"
+		"RequiredCustomShopName"		"shashire_equip_shop"
+
+		"AbilityValues"
+        {
+			"bonus_armor"	"2"
+        }	
+	}
+
+	//冥寒新兵披风
+    "item_wraith_king_cape"
+	{
+		"BaseClass"						"item_lua"
+		"AbilityTextureName"			"item_wraith_king_cape"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"Model"							"models/heroes/abaddon/cape.vmdl"
+		"ScriptFile"					"items/cape/item_abaddon_cape"
+
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0.0"
+        "AbilityCooldown"				"0.0"
+
+		"ItemCost"						"100"
+		"ItemPurchasable"				"1"
+		"ItemShopTags"					"attack"
+		"ItemQuality"					"component"
+		"ItemStackable"					"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"0"
+		"ItemKillable"					"0"
+        "ItemSellable"					"1"
+		"ItemCastOnPickup"				"0"
+        "AllowedInBackpack"				"0"
+        "ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_NEVER"
+        "IsTempestDoubleClonable"		"0"
+        "ItemIsNeutralDrop"				"0"
+		"ItemDroppable"					"1"
+        "CustomShop"					"1"
+        "SideShop"                      "0"
+        "SecretShop"					"0"
+		"RequiresCustomShop"			"1"
+		"RequiredCustomShopName"		"shashire_equip_shop"
+
+		"AbilityValues"
+        {
+			"bonus_armor"	"1"
+        }	
+	}
+
+	//冥寒新兵护肩
+    "item_wraith_king_shoulder"
+	{
+		"BaseClass"						"item_lua"
+		"AbilityTextureName"			"item_wraith_king_shoulder"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"Model"							"models/heroes/abaddon/shoulders.vmdl"
+		"ScriptFile"					"items/shoulder/item_abaddon_shoulder"
+
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0.0"
+        "AbilityCooldown"				"0.0"
+
+		"ItemCost"						"100"
+		"ItemPurchasable"				"1"
+		"ItemShopTags"					"attack"
+		"ItemQuality"					"component"
+		"ItemStackable"					"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"0"
+		"ItemKillable"					"0"
+        "ItemSellable"					"1"
+		"ItemCastOnPickup"				"0"
+        "AllowedInBackpack"				"0"
+        "ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_NEVER"
+        "IsTempestDoubleClonable"		"0"
+        "ItemIsNeutralDrop"				"0"
+		"ItemDroppable"					"1"
+        "CustomShop"					"1"
+        "SideShop"                      "0"
+        "SecretShop"					"0"
+		"RequiresCustomShop"			"1"
+		"RequiredCustomShopName"		"shashire_equip_shop"
+
+		"AbilityValues"
+        {
+			"bonus_armor"	"1"
+        }	
+	}
+
+}
